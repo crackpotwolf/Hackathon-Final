@@ -1,0 +1,7 @@
+location /api/accelerator/swagger {
+  proxy_pass http://accelerator/swagger;
+}
+
+location /api/accelerator/ {
+  proxy_pass http://accelerator;
+}

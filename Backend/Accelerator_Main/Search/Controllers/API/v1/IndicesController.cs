@@ -25,7 +25,7 @@ namespace Search.Controllers.API.v1
 #endif
     public class IndicesController : ControllerBase
     {
-        protected IBaseEntityRepository<FullProject> _fullProjectRepository;
+        protected IBaseEntityRepository<Project> _fullProjectRepository;
 
         protected readonly IndicesManager _indicesManager;
         private readonly ILogger<IndexModel> _logger;
@@ -33,7 +33,7 @@ namespace Search.Controllers.API.v1
 
         /// <inheritdoc />
         public IndicesController(ILogger<IndexModel> logger,
-            IBaseEntityRepository<FullProject> fullProjectRepository,
+            IBaseEntityRepository<Project> fullProjectRepository,
             IndicesManager indicesManager,
             IOptions<PathConfig> pathConfig)
         {

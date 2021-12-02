@@ -30,14 +30,14 @@ namespace Search.Controllers.API.v1
 #endif
     public class SearchController : ControllerBase
     {
-        protected IBaseEntityRepository<FullProject> _fullProjectRepository;
+        protected IBaseEntityRepository<Project> _fullProjectRepository;
 
         private readonly ILogger<IndexModel> _logger;
         private readonly PathConfig _pathConfig;
 
         /// <inheritdoc />
         public SearchController(ILogger<IndexModel> logger,
-            IBaseEntityRepository<FullProject> fullProjectRepository,
+            IBaseEntityRepository<Project> fullProjectRepository,
             IOptions<PathConfig> pathConfig)
         {
             _fullProjectRepository = fullProjectRepository;
@@ -67,7 +67,7 @@ namespace Search.Controllers.API.v1
                 // Инициализация
                 _logger.LogInformation($"Инициализация.");
 
-                var search = new WordSearch(_pathConfig.DocumentsIndexes, typeof(FullProject).GetSerachableFieldsNames());
+                var search = new WordSearch(_pathConfig.DocumentsIndexes, typeof(Project).GetSerachableFieldsNames());
 
                 // Поиск
                 _logger.LogInformation($"Поиск. {inputText}");
@@ -123,7 +123,7 @@ namespace Search.Controllers.API.v1
                 // Инициализация
                 _logger.LogInformation($"Инициализация.");
 
-                var search = new WordSearch(_pathConfig.DocumentsIndexes, typeof(FullProject).GetSerachableFieldsNames());
+                var search = new WordSearch(_pathConfig.DocumentsIndexes, typeof(Project).GetSerachableFieldsNames());
 
                 // Поиск
                 _logger.LogInformation($"Поиск. {inputText}");
