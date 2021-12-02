@@ -21,7 +21,6 @@ import {DialogModule} from "primeng/dialog";
 import {HttpErrorInterceptor} from "../interceptors/http-error.interceptor";
 import {FilterComponent} from './components/filter/filter.component';
 import {SetPasswordComponent} from "./pages/account/set-password/set-password.component";
-import {ProjectService} from "./pages/main/cardgrid/services/projectservices";
 
 export function createTranslateLoader(http: HttpClient): any {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
@@ -64,8 +63,7 @@ export function createTranslateLoader(http: HttpClient): any {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpErrorInterceptor,
       multi: true
-    },
-    ProjectService
+    }
   ],
   bootstrap: [AppComponent],
 })
