@@ -159,5 +159,96 @@ namespace Search.Controllers.API.v1
                 return StatusCode(500, "Не удалось выполнить поиск по документам");
             }
         }
+
+        /// <summary>
+        /// Поиск объектов по ключевым словам
+        /// </summary>
+        /// <param name="input">Текст для поиска</param>
+        /// <returns>Название файлов с совпадениями в порядке релевантности</returns>
+        [HttpPost("extend-objects")]
+        [DisableRequestSizeLimit]
+        [Produces("application/json")]
+        [SwaggerResponse(200, "Объекты с совпадениями в порядке релевантности", typeof(List<Project>))]
+        [ProducesResponseType(typeof(Exception), 400)]
+        public IActionResult ExtendedSearchByText(ExtendSearch input)
+        {
+            try
+            {
+                // Для замера времени
+                DateTime timeStart = DateTime.UtcNow;
+
+                // Инициализация
+                var results = new List<Guid>();
+
+                var teamGuids = new List<Guid>();
+                if (!String.IsNullOrEmpty(input.Team))
+                {
+                    var search = new WordSearch(_pathConfig.DocumentsIndexes, new List<string>() { "OrderTeam" }.ToArray());
+
+                    // Поиск
+                    _logger.LogInformation($"Поиск. {input.Team}");
+
+                    var result = search.Search(input.Team);
+                    teamGuids = result.Hits.Select(t => t.Guid).ToList();
+                }
+
+                var projectGuids = new List<Guid>();
+                if (!String.IsNullOrEmpty(input.Project))
+                {
+                    var search = new WordSearch(_pathConfig.DocumentsIndexes, new List<string>() { "Name" }.ToArray());
+
+                    // Поиск
+                    _logger.LogInformation($"Поиск. {input.Project}");
+
+                    var result = search.Search(input.Project);
+                    projectGuids= result.Hits.Select(t => t.Guid).ToList();
+                }
+
+                var descrGuids = new List<Guid>();
+
+                if (!String.IsNullOrEmpty(input.Description))
+                {
+                    var search = new WordSearch(_pathConfig.DocumentsIndexes, typeof(Project).GetSerachableFieldsNames().ToList().Except(new List<string>() { "Name", "OrderTeam" }).ToArray());
+
+                    // Поиск
+                    _logger.LogInformation($"Поиск. {input.Description}");
+
+                    var result = search.Search(input.Description);
+                    descrGuids = result.Hits.Select(t => t.Guid).ToList();
+                }
+                if (!String.IsNullOrEmpty(input.Team) && !String.IsNullOrEmpty(input.Project) && !String.IsNullOrEmpty(input.Description))
+                    results = teamGuids.Intersect(projectGuids).Intersect(descrGuids).Distinct().ToList();
+                else if (String.IsNullOrEmpty(input.Team) && !String.IsNullOrEmpty(input.Project) && !String.IsNullOrEmpty(input.Description))
+                    results = projectGuids.Intersect(descrGuids).Distinct().ToList();
+                else if (String.IsNullOrEmpty(input.Team) && String.IsNullOrEmpty(input.Project) && !String.IsNullOrEmpty(input.Description))
+                    results = descrGuids.Distinct().ToList();
+                else if (!String.IsNullOrEmpty(input.Team) && String.IsNullOrEmpty(input.Project) && !String.IsNullOrEmpty(input.Description))
+                    results = teamGuids.Intersect(descrGuids).Distinct().ToList();
+                else if (!String.IsNullOrEmpty(input.Team) && !String.IsNullOrEmpty(input.Project) && String.IsNullOrEmpty(input.Description))
+                    results = teamGuids.Intersect(projectGuids).Distinct().ToList();
+                else if (!String.IsNullOrEmpty(input.Team) && String.IsNullOrEmpty(input.Project) && String.IsNullOrEmpty(input.Description))
+                    results = teamGuids.Distinct().ToList();
+                else if (String.IsNullOrEmpty(input.Team) && !String.IsNullOrEmpty(input.Project) && String.IsNullOrEmpty(input.Description))
+                    results = projectGuids.Distinct().ToList();
+                return Ok(_projectRepository.GetListQuery().Where(p => results.Contains(p.Guid))
+                    .Include(p => p.Activities)
+                    .Include(p => p.Budget)
+                    .Include(p => p.Effects)
+                    .Include(p => p.Materials)
+                    .Include(p => p.Meetings)
+                    .Include(p => p.Order)
+                    .Include(p => p.Stages)
+                    .Include(p => p.Statuses)
+                    .Include(p => p.Teams)
+                    .ToList());
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Не удалось выполнить поиск по документам. " +
+                    $"Ошибка: {ex.Message}");
+
+                return StatusCode(500, "Не удалось выполнить поиск по документам");
+            }
+        }
     }
 }
