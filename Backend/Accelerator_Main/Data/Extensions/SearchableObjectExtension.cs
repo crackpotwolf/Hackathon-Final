@@ -18,18 +18,18 @@ namespace Data.Extensions
         /// <summary>
         /// Получение строкового представления объекта для поиска
         /// </summary>
-        //public static string GetSearchablePropertiesStringifiedValue(this ISearchable data)
-        //{
-        //    var res = new List<string>();
+        public static string GetSearchablePropertiesStringifiedValue(this ISearchable data)
+        {
+            var res = new List<string>();
 
-        //    foreach (PropertyInfo property in data.GetType().GetProperties()
-        //        .Where(p => p.CustomAttributes.Select(m => m.AttributeType).Contains(typeof(SearchableAttribute))))
-        //    {
-        //        if(property.GetValue(data)!=null)
-        //            res.Add(property.GetValue(data).ToString());
-        //    }
-        //    return String.Join(", ", res);
-        //}
+            foreach (PropertyInfo property in data.GetType().GetProperties()
+                .Where(p => p.CustomAttributes.Select(m => m.AttributeType).Contains(typeof(SearchableAttribute))))
+            {
+                if (property.GetValue(data) != null)
+                    res.Add(property.GetValue(data).ToString());
+            }
+            return String.Join(", ", res);
+        }
 
         /// <summary>
         /// Индексирование объекта

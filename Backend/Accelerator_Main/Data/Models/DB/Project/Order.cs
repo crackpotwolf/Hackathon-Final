@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Data.Attributes;
+using Data.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Data.Models.DB.Project
 {
-    public class Order : ProjectData
+    public class Order : ProjectData, ISearchable
     {
         /// <summary>
         /// Наименование команды/организации
@@ -21,25 +23,30 @@ namespace Data.Models.DB.Project
         /// <summary>
         /// Краткое описание продукта
         /// </summary>
+        [Searchable]
         public string ShortDescription { get; set; }
 
         /// <summary>
         /// Кейсы использования продукта
         /// </summary>
+        [Searchable]
         public string Cases { get; set; }
 
         /// <summary>
         /// Польза продукта
         /// </summary>
+        [Searchable]
         public string Benefit { get; set; }
         /// <summary>
         /// Организация Московского транспорта, интересная в первую очередь
         /// </summary>
+        [Searchable]
         public string TransportOrganization { get; set; }
 
         /// <summary>
         /// Запрос к акселератору и видение пилотного проекта
         /// </summary>
+        [Searchable]
         public string PilotVision { get; set; }
 
         /// <summary>

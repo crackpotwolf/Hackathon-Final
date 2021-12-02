@@ -80,7 +80,13 @@ namespace Accelerator.Controllers.API.v1.Projects
             try
             {
                 _projectsRepository.AddRange(data);
-                return Ok();
+                var search = new WordSearch(_pathConfig.DocumentsIndexes);
+
+                var res = _projectsRepository.AddRange(data);
+                res.ToList().ForEach(p => p.AddSearchableObjectToIndexSeparately(p.Guid, search));
+                search.CommitChanges();
+
+                return Ok(res.Count(p => p.Guid != Guid.Empty));
             }
             catch (Exception ex)
             {
