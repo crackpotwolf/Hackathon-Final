@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {RouterModule} from '@angular/router';
 
 import {FooterComponent} from "./footer/footer.component";
 import {SidebarComponent} from "./sidebar/sidebar.component";
@@ -14,6 +14,10 @@ import {BadgeModule} from "primeng/badge";
 import {DividerModule} from "primeng/divider";
 import {ToastModule} from "primeng/toast";
 import {MatMenuModule} from "@angular/material/menu";
+import {ButtonModule} from "primeng/button";
+import {SidebarModule} from "primeng/sidebar";
+import {PagesModule} from "../pages/pages.module";
+import {RequestForInnovationComponent} from "../pages/request-for-innovation/request-for-innovation.component";
 
 @NgModule({
   declarations: [TopbarComponent, FooterComponent, SidebarComponent, WrapperComponent, RightsidebarComponent],
@@ -26,9 +30,13 @@ import {MatMenuModule} from "@angular/material/menu";
     BadgeModule,
     DividerModule,
     ToastModule,
-    MatMenuModule
+    MatMenuModule,
+    ButtonModule,
+    SidebarModule,
+    PagesModule
   ],
   exports: [TopbarComponent, FooterComponent, SidebarComponent, WrapperComponent]
 })
-export class LayoutsModule { }
+export class LayoutsModule {
+}
 

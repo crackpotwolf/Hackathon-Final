@@ -79,7 +79,10 @@ export class FilterComponent implements OnInit {
           break;
       }
     }
-    this.formFields = this.formFields;
+    this.formFields = this.formFields.map(p => {
+      p.wide = true;
+      return p;
+    });
   }
 
   /**

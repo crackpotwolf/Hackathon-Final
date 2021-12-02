@@ -1,0 +1,33 @@
+<!-- PRELOADER -->
+<div *ngIf="!formFields.length" class="h-100 d-flex justify-content-center align-items-center">
+  <div>
+    <i class="pi pi-spin pi-spinner" style="font-size: 3rem"></i>
+  </div>
+</div>
+
+<div *ngIf="formFields.length" class="p-2">
+  <!--  Заголовок -->
+
+  <div class="position-fixed" [ngStyle]="{
+  'top': '14px'
+  }">
+    <div class="d-flex justify-content-between">
+      <h3 class="ml-2">Заявка на инновацию</h3>
+    </div>
+  </div>
+
+  <!--  Кнопки -->
+
+  <div class="position-fixed" [ngStyle]="{
+  'top': '14px',
+  'right': '3rem'
+  }">
+    <button (click)="sendRequestForInnovation()" class="btn btn-outline-primary mr-2"
+            disabled="{{isValidForm() ? '' : 'disabled'}}">Отправить
+      <i class="far fa-save"></i></button>
+  </div>
+  <!--  Поля-->
+
+  <app-dynamic-form [fields]="formFields"
+                    (onFormChanged)="onFormChanged($event, 'general')"></app-dynamic-form>
+</div>

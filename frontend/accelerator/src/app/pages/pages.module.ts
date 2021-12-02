@@ -56,6 +56,8 @@ import {FilterComponent} from "../components/filter/filter.component";
 import {DynamicFormFieldComponent} from "../components/dynamic-forms/dynamic-form-field/dynamic-form-field.component";
 import {DynamicFormComponent} from "../components/dynamic-forms/dynamic-form/dynamic-form.component";
 import {DynamicFormControlService} from "../components/dynamic-forms/dynamic-form-control-service.service";
+import {ButtonModule} from 'primeng/button';
+import {RequestForInnovationComponent} from './request-for-innovation/request-for-innovation.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -75,12 +77,11 @@ const DragConfig = {
       CardgridComponent,
       FilterComponent,
       DynamicFormFieldComponent,
-      DynamicFormComponent
+      DynamicFormComponent,
+      RequestForInnovationComponent
     ],
   imports: [
     CommonModule,
-    LayoutsModule,
-
     // NG Material Modules
     MatSidenavModule,
     MatIconModule,
@@ -125,6 +126,9 @@ const DragConfig = {
     SkeletonModule,
     DividerModule,
     PagesRoutingModule,
+  ],
+  exports: [
+    RequestForInnovationComponent,
   ],
   providers: [
     {

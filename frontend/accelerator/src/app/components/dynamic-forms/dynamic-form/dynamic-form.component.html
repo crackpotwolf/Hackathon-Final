@@ -2,7 +2,7 @@
 <!--  <form (ngSubmit)="onSubmit()" [formGroup]="form">-->
 
   <form [formGroup]="form" class="w-100 row relative">
-    <div *ngFor="let field of fields" class="w-100 py-2 px-lg-2"
+    <div *ngFor="let field of fields" class="py-2 px-lg-2"
     [ngClass]="{
   'col-lg-4': !wholeWidth && !field.wide && !field.half,
   'col-lg-6': !wholeWidth && field.half,
