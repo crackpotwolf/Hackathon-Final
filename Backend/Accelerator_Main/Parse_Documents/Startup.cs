@@ -38,7 +38,12 @@ namespace Parse_Documents
             var curProjectName = $"{Assembly.GetExecutingAssembly().GetName().Name}";
 
             // Swagger docs
-            services.AddSwagger(curProjectName);
+            services.AddSwagger(curProjectName, c =>
+            {
+                c.AddXmlComments("Data", curProjectName);
+                c.AddXmlComments("Parse_Documents", curProjectName);
+                c.AddXmlComments("Data_Path", curProjectName);
+            });
 
             #endregion
         }

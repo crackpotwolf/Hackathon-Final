@@ -1,7 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormFieldBase} from "../entities/_field-base";
-import {FormControl, FormGroup} from "@angular/forms";
+import {FormControl, FormGroup, FormGroupDirective, NgForm} from "@angular/forms";
 import * as moment from 'moment';
+import {ErrorStateMatcher} from "@angular/material/core";
 
 @Component({
   selector: 'app-dynamic-form-field',
@@ -9,10 +10,11 @@ import * as moment from 'moment';
   styleUrls: ['./dynamic-form-field.component.sass']
 })
 
+
 /**
  * Динамический элемент формы
  */
-export class DynamicFormFieldComponent implements OnInit{
+export class DynamicFormFieldComponent implements OnInit {
 
   /**
    * Информация о элементе формы
@@ -32,11 +34,16 @@ export class DynamicFormFieldComponent implements OnInit{
   constructor() {
     // this.controll = new FormControl(moment(this.field?.value) );
   }
+
   ngOnInit(): void {
   }
 
 
   get isValid() {
+    // let control = this.form.controls[this.field.key];
+    // const isSubmitted = !!this.form;
+    // let test = !(control && !control.valid && (control.dirty || control.touched || isSubmitted));
+    // return test;
     return this.form.controls[this.field.key]?.valid ?? true;
   }
 
@@ -48,7 +55,7 @@ export class DynamicFormFieldComponent implements OnInit{
     let messages: string[] = [];
     // if(this.field.required)
     if (!this.isValid)
-      messages.push(`"${this.field.label}" не может быть пустым.`);
+      messages.push(`Поле "${this.field.label}" не может быть пустым.`);
     return messages.join('\n')
   }
 

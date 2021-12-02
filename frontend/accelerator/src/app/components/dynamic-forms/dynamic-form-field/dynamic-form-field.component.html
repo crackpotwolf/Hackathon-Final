@@ -1,21 +1,26 @@
 <div [formGroup]="form">
-  <label [attr.for]="field.key">{{field.label}}</label>
+  <div class="d-flex">
+    <label [attr.for]="field.key" class="bold mb-1">{{field.label}}</label>
+    <label *ngIf="field.required" [attr.for]="field.key" class="bold mb-1 ml-1" [ngClass]="{
+          'is-invalid': !isValid
+}">*</label>
+  </div>
 
 
-  <div [ngSwitch]="field.controlType" [pTooltip]="getErrorMessage()" [tooltipDisabled]="!field.required">
+  <!--  <div [ngSwitch]="field.controlType" [pTooltip]="getErrorMessage()" [tooltipDisabled]="!field.required"-->
+  <!--       [tooltipPosition]="'bottom'">-->
+  <div [ngSwitch]="field.controlType">
 
 
     <!--  textbox  -->
     <input *ngSwitchCase="'textbox'" [formControlName]="field.key" [id]="field.key" [type]="field.type"
-           [ngClass]="{
-          'is-invalid': !isValid
-}" class="form-control" pInputText [value]="field.value" [placeholder]="field.placeholder">
+           class="form-control" pInputText [value]="field.value" [placeholder]="field.placeholder">
 
     <!--  dropdown  -->
     <p-dropdown *ngSwitchCase="'dropdown'" [(ngModel)]="field.value" [formControlName]="field.key"
                 [options]="field.options" optionLabel="value"
                 [filter]="true" filterBy="value" [placeholder]="field.placeholder" class="w-100"
-                styleClass="w-100 {{ !isValid ? 'is-invalid' : ''}}" optionValue="key">
+                styleClass="w-100" optionValue="key">
       <ng-template let-option pTemplate="item">
         <div class="country-item">
           <div>{{option.value}}</div>
@@ -27,9 +32,7 @@
     <div *ngSwitchCase="'datetimepicker'" class="input-group">
 
       <input class="form-control" placeholder="Введите дату" [ngModel]="field.value" [formControlName]="field.key"
-             [matDatepicker]="dp" [value]="field.value" [ngClass]="{
-  'is-invalid': !isValid
-}">
+             [matDatepicker]="dp" [value]="field.value">
       <div class="input-group-append">
 
         <div class="input-group-append">
@@ -49,9 +52,7 @@
 
     <!--  textarea  -->
     <textarea *ngSwitchCase="'textarea'" [rows]="1" pInputTextarea [autoResize]="true" [value]="field.value"
-              [placeholder]="field.placeholder" [formControlName]="field.key" class="w-100" [ngClass]="{
-          'is-invalid': !isValid
-}"></textarea>
+              [placeholder]="field.placeholder" [formControlName]="field.key" class="w-100"></textarea>
 
 
     <!--  boolean  -->
@@ -84,5 +85,6 @@
 
   </div>
 
+  <label *ngIf="field.subLabel" [attr.for]="field.key" class="mb-1 text-xs" [innerHTML]="field.subLabel"></label>
   <!--  <div class="errorMessage" *ngIf="!isValid">{{field.label}} is required</div>-->
 </div>

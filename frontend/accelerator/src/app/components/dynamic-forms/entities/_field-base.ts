@@ -26,6 +26,10 @@ export class FormFieldBase<T> {
    */
   label: string;
   /**
+   * Описание поля - будет размещено под полем ввода
+   */
+  subLabel: string;
+  /**
    * Ялвяется ли полей обязательным
    */
   required: boolean;
@@ -108,6 +112,7 @@ export class FormFieldBase<T> {
     max?: T;
     key?: string;
     label?: string;
+    subLabel?: string;
     required?: boolean;
     // order?: number;
     controlType?: string;
@@ -122,6 +127,7 @@ export class FormFieldBase<T> {
     onLabel?: string,
     offLabel?: string,
     onChange?: (currentValue: any) => void,
+    convertLineBreaks?: boolean,
   } = {}) {
     this.value = options.value || undefined;
     this.min = options.min || undefined;
@@ -142,5 +148,12 @@ export class FormFieldBase<T> {
     this.onLabel = options.onLabel || '';
     this.offLabel = options.offLabel || '';
     this.onChange = options.onChange;
+
+
+    if (options.convertLineBreaks == undefined || options.convertLineBreaks) {
+      this.subLabel = options.subLabel?.replace(/\n/g, '<br/>') || '';
+    } else {
+      this.subLabel = options.subLabel || '';
+    }
   }
 }

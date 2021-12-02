@@ -237,6 +237,15 @@ namespace Search_Data.Search
 		}
 
 		/// <summary>
+		/// Фиксирует изменения
+		/// </summary>
+		public void DiscardChanges()
+		{
+			// Закрывает все связанные файлы
+			_writer.Dispose();
+		}
+
+		/// <summary>
 		/// Поиск по индексам
 		/// </summary>
 		public SearchResults Search(string query)

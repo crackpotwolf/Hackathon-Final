@@ -1,0 +1,20 @@
+[
+  {
+    "FirstName": "Главный",
+    "LastName": "Самый",
+    "MiddleName": "Администратор",
+    "Email": "test@test.ru",
+    "Password": "672412Aa",
+    "Phone": "+79096063443",
+    "Roles": [ "Admin" ]
+  },
+  {
+    "FirstName": "Тестовая",
+    "LastName": "Внешняя",
+    "MiddleName": "Роль",
+    "Email": "external@test.ru",
+    "Password": "111111",
+    "Phone": "+79087071221",
+    "Roles": [ "External" ]
+  }
+]

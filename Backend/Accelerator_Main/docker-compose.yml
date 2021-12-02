@@ -1,0 +1,53 @@
+version: '3'
+
+services:
+  accelerator:
+    container_name: accelerator
+    hostname: accelerator
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+    build:
+      context: ./
+      dockerfile: ./Accelerator/Accelerator.Dockerfile
+
+  accelerator_authentication:
+    container_name: accelerator-authentication
+    hostname: accelerator-authentication
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+    build:
+      context: ./
+      dockerfile: ./Authentication/Authentication.Dockerfile
+
+  accelerator_parse_documents:
+    container_name: accelerator-parse-documents
+    hostname: accelerator-parse-documents
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+    build:
+      context: ./
+      dockerfile: ./Parse_Documents/Parse_Documents.Dockerfile
+
+  accelerator_search:
+    container_name: accelerator-search
+    hostname: accelerator-search
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+    build:
+      context: ./
+      dockerfile: ./Search/Search.Dockerfile
+
+  nginx:
+    container_name: nginx
+    hostname: nginx
+    image: nginx
+    restart: unless-stopped
+    ports:
+      - 5000:80
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./Accelerator/proxy.locations:/etc/nginx/conf.d/locations/accelerator.locations
+      - ./Authentication/proxy.locations:/etc/nginx/conf.d/locations/authentication.locations
+      - ./Parse_Documents/proxy.locations:/etc/nginx/conf.d/locations/parse_documents.locations
+      - ./Search/proxy.locations:/etc/nginx/conf.d/locations/search.locations
+  

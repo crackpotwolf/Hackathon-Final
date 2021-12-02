@@ -40,6 +40,7 @@ export class TopbarComponent implements OnInit {
   //   event.preventDefault();
   //   this.mobileMenuButtonClicked.emit();
   // }
+  displaySidebar: boolean = false;
 
   /**
    * Выход
@@ -62,5 +63,13 @@ export class TopbarComponent implements OnInit {
    */
   onClickFavorites(event: MouseEvent) {
     WrapperComponent.notImplemented(this.messageService);
+  }
+
+  /**
+   * Заявка на инновацию
+   * @param event Событие клика
+   */
+  onClickRequestForInnovation(event: MouseEvent) {
+
   }
 }

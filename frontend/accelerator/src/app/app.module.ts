@@ -11,7 +11,7 @@ import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {ReactiveFormsModule} from "@angular/forms";
 import {DemoMaterialModule} from "./core/material-module";
-import {NoopAnimationsModule} from "@angular/platform-browser/animations";
+import {BrowserAnimationsModule, NoopAnimationsModule} from "@angular/platform-browser/animations";
 import {AuthInterceptor} from "../interceptors/auth/auth.interceptor";
 import {LayoutsModule} from "./layouts/layouts.module";
 import {PagesModule} from "./pages/pages.module";
@@ -36,6 +36,7 @@ export function createTranslateLoader(http: HttpClient): any {
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
     NoopAnimationsModule,

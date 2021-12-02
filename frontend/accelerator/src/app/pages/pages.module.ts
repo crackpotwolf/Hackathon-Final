@@ -57,6 +57,9 @@ import {DynamicFormFieldComponent} from "../components/dynamic-forms/dynamic-for
 import {DynamicFormComponent} from "../components/dynamic-forms/dynamic-form/dynamic-form.component";
 import {DynamicFormControlService} from "../components/dynamic-forms/dynamic-form-control-service.service";
 import {DataViewModule} from "primeng/dataview";
+import {ButtonModule} from 'primeng/button';
+import {RequestForInnovationComponent} from './request-for-innovation/request-for-innovation.component';
+import { ProjectComponent } from './project/project.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -76,7 +79,9 @@ const DragConfig = {
       CardgridComponent,
       FilterComponent,
       DynamicFormFieldComponent,
-      DynamicFormComponent
+      DynamicFormComponent,
+      RequestForInnovationComponent,
+      ProjectComponent
     ],
   imports: [
     CommonModule,
@@ -127,6 +132,9 @@ const DragConfig = {
     DividerModule,
     PagesRoutingModule,
     DataViewModule,
+  ],
+  exports: [
+    RequestForInnovationComponent,
   ],
   providers: [
     {
