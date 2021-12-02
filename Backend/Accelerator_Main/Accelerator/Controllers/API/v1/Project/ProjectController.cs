@@ -77,11 +77,10 @@ namespace Accelerator.Controllers.API.v1.Projects
         [SwaggerResponse(500, "Неизвестная ошибка")]
         public IActionResult Creation(List<Project> data)
         {
+            var search = new WordSearch(_pathConfig.DocumentsIndexes);
+
             try
             {
-                _projectsRepository.AddRange(data);
-                var search = new WordSearch(_pathConfig.DocumentsIndexes);
-
                 var res = _projectsRepository.AddRange(data);
                 res.ToList().ForEach(p => p.AddSearchableObjectToIndexSeparately(p.Guid, search));
                 search.CommitChanges();
@@ -90,6 +89,7 @@ namespace Accelerator.Controllers.API.v1.Projects
             }
             catch (Exception ex)
             {
+                search.DiscardChanges();
                 return StatusCode(500, ex);
             }
         }
