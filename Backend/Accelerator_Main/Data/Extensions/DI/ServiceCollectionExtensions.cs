@@ -180,8 +180,9 @@ namespace Data.Extensions.DI
         /// </summary>
         /// <param name="services"></param>
         /// <param name="curProjectName"></param>
-        public static void AddSwagger(this IServiceCollection services, string curProjectName)
+        public static void AddSwagger(this IServiceCollection services, string curProjectName, Action<SwaggerGenOptions> addXmlComments)
         {
+
             #region Swagger
 
             services.AddApiVersioning(
@@ -204,13 +205,7 @@ namespace Data.Extensions.DI
             {
                 c.DocumentFilter<EnumTypesDocumentFilter>();
 
-                c.AddXmlComments("Accelerator", curProjectName);
-                c.AddXmlComments("Authentication", curProjectName);
-                c.AddXmlComments("Data", curProjectName);
-                c.AddXmlComments("Data_Path", curProjectName);
-                c.AddXmlComments("Parse_Documents", curProjectName);
-                c.AddXmlComments("Search", curProjectName);
-                c.AddXmlComments("Search_Data", curProjectName);
+                addXmlComments(c);
 
                 c.EnableAnnotations();
 

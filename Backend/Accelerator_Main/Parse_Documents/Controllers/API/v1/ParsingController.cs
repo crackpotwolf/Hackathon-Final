@@ -13,9 +13,6 @@ namespace Parse_Documents.Controllers.API.v1
     [ApiVersion("1.0")]
     [DisplayName("parsing")]
     [SetRoute]
-#if RELEASE
-    [Authorize]
-#endif
     public class ParsingController : _AbstractController
     {
         private readonly ILogger<IndexModel> _logger;

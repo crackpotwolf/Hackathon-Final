@@ -24,9 +24,6 @@ namespace Authentication.Controllers.API.v1
     [ApiVersion("1.0")]
     [DisplayName("account")]
     [SetRoute]
-#if RELEASE
-    [Authorize(Roles = "Admin")]
-#endif
     public class AccountController : Controller
     {
         protected IBaseEntityRepository<User> _usersRepository;
@@ -91,7 +88,7 @@ namespace Authentication.Controllers.API.v1
         /// <param name="userGuid">Идентификатор пользователя</param>
         /// <returns></returns>
         [HttpDelete]
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public IActionResult RemoveUser(Guid userGuid)
         {
             try
@@ -113,7 +110,7 @@ namespace Authentication.Controllers.API.v1
         /// <param name="model">Информация о пользователе</param>
         /// <returns>Токен доступа</returns>
         [HttpPost("creation")]
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [SwaggerResponse(200, "Токен", typeof(Token))]
         [SwaggerResponse(400, "Неверные данные или пользователь уже сущестует. Содержит информацию об ошибках.", typeof(List<AuthStatus>))]
         [SwaggerResponse(500, "Неизвестная ошибка")]
@@ -298,7 +295,6 @@ namespace Authentication.Controllers.API.v1
         [HttpPost("update-password")]
         [SwaggerResponse(200, "Пароль успешно изменен")]
         [SwaggerResponse(400, "Не удалось изменить пароль. Содержит информацию об ошибке", typeof(string))]
-        [Authorize]
         public IActionResult ChangePassword(string oldPassword, string password, string confirmPassword)
         {
             var res = ResultUserManager.InvalidConfirmPassword;
@@ -319,7 +315,7 @@ namespace Authentication.Controllers.API.v1
         /// <returns></returns>
         [HttpGet("user-info")]
         [SwaggerResponse(200, "Информация о пользователе", typeof(User))]
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public IActionResult UserInfo()
         {
             return Ok(_users.FirstOrDefault(p => p.Guid == GetUserGuid()));
@@ -332,7 +328,7 @@ namespace Authentication.Controllers.API.v1
         /// <returns></returns>
         [HttpPost("users-info")]
         [SwaggerResponse(200, "Информация о пользователях", typeof(List<User>))]
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public IActionResult UsersInfo(List<Guid> guids)
         {
             return Ok(_users.Where(p => guids.Contains(p.Guid)));
@@ -346,7 +342,7 @@ namespace Authentication.Controllers.API.v1
         [HttpPut("update-user-info")]
         [SwaggerResponse(200, "Обновленная информация о пользователе", typeof(User))]
         [SwaggerResponse(500, "Произошла ошибка")]
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public IActionResult UpdateUserInfo(UserUpdateInfo model)
         {
             var user = _mapper.Map(model, GetUser());
@@ -363,7 +359,7 @@ namespace Authentication.Controllers.API.v1
         /// <param name="guid">Идентификатор пользователя</param>
         /// <param name="roles">Список ролей пользователя</param>
         /// <returns></returns>
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpPost("set-roles/{guid}")]
         [SwaggerResponse(200, "Роли успешно обновлены")]
         [SwaggerResponse(400, "Пользователь не найден")]
@@ -388,7 +384,7 @@ namespace Authentication.Controllers.API.v1
         /// <returns></returns>
         [HttpGet("roles")]
         [SwaggerResponse(200, "Список ролей пользователей", typeof(List<Role>))]
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public IActionResult GetRolesList()
         {
             return Ok(_rolesRepository.GetListQuery()

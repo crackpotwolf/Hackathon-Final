@@ -14,6 +14,7 @@ using Microsoft.EntityFrameworkCore;
 using Data.Models.ModelViews.Files;
 using Data_Path.Models;
 using Search_Data.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Accelerator.Controllers.API.v1.Files
 {
@@ -24,9 +25,6 @@ namespace Accelerator.Controllers.API.v1.Files
     [ApiVersion("1.0")]
     [DisplayName("files")]
     [SetRoute]
-#if RELEASE
-    [Authorize]
-#endif
     public class FileController : DocumentOperation
     {
         private readonly IBaseEntityRepository<DocumentInfo> _documentInfo;

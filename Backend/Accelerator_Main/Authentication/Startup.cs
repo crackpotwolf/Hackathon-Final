@@ -30,7 +30,11 @@ namespace Authentication
             var curProjectName = $"{Assembly.GetExecutingAssembly().GetName().Name}";
 
             // Swagger docs
-            services.AddSwagger(curProjectName);
+            services.AddSwagger(curProjectName, c =>
+            {
+                c.AddXmlComments("Authentication", curProjectName);
+                c.AddXmlComments("Data", curProjectName);
+            });
 
             #endregion
         }

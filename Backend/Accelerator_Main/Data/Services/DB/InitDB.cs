@@ -33,8 +33,8 @@ namespace Data.Services.DB
 
         public void InitAuth()
         {
-            InitRoles();
-            InitUsers();
+            //InitRoles();
+            //InitUsers();
         }
 
         /// <summary>
