@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
+import {Component, OnInit} from '@angular/core';
+import {HttpClient} from "@angular/common/http";
+import {ProjectsService} from "../../../services/projects.service";
+import {ProjectServiceEventData} from "../../../services/data/ProjectServiceEventData";
+import {ProjectServiceEventType} from "../../../services/data/ProjectServiceEventType";
 
 @Component({
   selector: 'app-cardgrid',
@@ -7,18 +10,27 @@ import { HttpClient } from "@angular/common/http";
   styleUrls: ['./cardgrid.component.sass']
 })
 export class CardgridComponent implements OnInit {
-  public data:any=[]
-  constructor(private http: HttpClient) { }
+  public projects: any = []
 
-  getData(){
-    const url ='/api/accelerator/v1/project/full-all'
-    this.http.get(url).subscribe((res)=>{
-      this.data = res
-      console.log(this.data)
-    })
+  constructor(private http: HttpClient,
+              private projectsService: ProjectsService) {
+
+    this.projectsService.onEvents.subscribe((e) => this.onEventProjectSevice(e));
   }
+
   ngOnInit(): void {
-    this.getData()
   }
 
+  /**
+   * Обработка событий сервиса проектов
+   * @param e
+   * @private
+   */
+  private onEventProjectSevice(e: ProjectServiceEventData) {
+    switch (e.type) {
+      case ProjectServiceEventType.LoadingComplete:
+        this.projects = e.data;
+        break;
+    }
+  }
 }
