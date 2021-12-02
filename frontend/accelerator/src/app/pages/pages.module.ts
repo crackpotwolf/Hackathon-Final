@@ -56,6 +56,7 @@ import {FilterComponent} from "../components/filter/filter.component";
 import {DynamicFormFieldComponent} from "../components/dynamic-forms/dynamic-form-field/dynamic-form-field.component";
 import {DynamicFormComponent} from "../components/dynamic-forms/dynamic-form/dynamic-form.component";
 import {DynamicFormControlService} from "../components/dynamic-forms/dynamic-form-control-service.service";
+import {DataViewModule} from "primeng/dataview";
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -125,6 +126,7 @@ const DragConfig = {
     SkeletonModule,
     DividerModule,
     PagesRoutingModule,
+    DataViewModule,
   ],
   providers: [
     {
