@@ -56,7 +56,17 @@ namespace Accelerator.Controllers.API.v1.Projects
         {
             try
             {
-                return Ok(_projectsRepository.GetListQuery().FirstOrDefault(p=>p.Guid==guid));
+                return Ok(_projectsRepository.GetListQuery()
+                    .Include(p=>p.Activities)
+                    .Include(p=>p.Budget)
+                    .Include(p=>p.Effects)
+                    .Include(p=>p.Materials)
+                    .Include(p=>p.Meetings)
+                    .Include(p=>p.Order)
+                    .Include(p=>p.Stages)
+                    .Include(p=>p.Statuses)
+                    .Include(p=>p.Teams)
+                    .FirstOrDefault(p=>p.Guid==guid));
             }
             catch (Exception ex)
             {
@@ -70,7 +80,7 @@ namespace Accelerator.Controllers.API.v1.Projects
         {
             try
             {
-                return Ok(await _projectsRepository.GetListQuery().ToListAsync());
+                return Ok(await _projectsRepository.GetListQuery().Include(p=>p.Order).ToListAsync());
             }
             catch (Exception ex)
             {
