@@ -106,17 +106,11 @@ namespace Data.Models.DB.Project
         public List<Effect> Effects { get; set; }
 
         public List<Stage> Stages { get; set; }
-
         public List<Team> Teams { get; set; }
-
         public List<Budget> Budget { get; set; }
-
         public List<Status> Statuses { get; set; }
-
         public List<Activities> Activities { get; set; }
-
         public List<Meeting> Meetings { get; set; }
-
         public List<Material> Materials { get; set; }
     }
 }
