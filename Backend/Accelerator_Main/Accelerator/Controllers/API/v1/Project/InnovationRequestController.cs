@@ -24,9 +24,6 @@ namespace Accelerator.Controllers.API.v1.Projects
     [ApiVersion("1.0")]
     [DisplayName("innovation")]
     [SetRoute]
-#if RELEASE
-    [Authorize]
-#endif
     public class InnovationRequestController : ControllerBase
     {
         protected IBaseEntityRepository<InnovationRequest> _requestsRepository;
