@@ -1,4 +1,5 @@
-﻿using Data.Models.DB.Account;
+﻿using Data.Models.DB;
+using Data.Models.DB.Account;
 using Data.Models.DB.Files;
 using Data.Models.DB.Project;
 using Microsoft.EntityFrameworkCore;
@@ -54,6 +55,8 @@ namespace Data
         public DbSet<Status> Statuses { get; set; }
 
         public DbSet<Team> Teams { get; set; }
+
+        public DbSet<InnovationRequest> InnovationRequests { get; set; }
 
         #endregion
 
