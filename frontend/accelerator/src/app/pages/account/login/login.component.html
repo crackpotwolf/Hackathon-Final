@@ -1,0 +1,48 @@
+<p-toast></p-toast>
+
+
+<div class="d-flex vh-100 w-100 justify-content-center align-items-center">
+
+  <!--  <div>-->
+  <form [formGroup]="form" class="d-flex flex-column align-items-center" style="width: 350px">
+
+    <div style="font-size: 2rem;">Вход в систему</div>
+    <mat-error *ngIf="this.isErrorAuthentication">{{ getErrorMessage() }}</mat-error>
+
+    <mat-form-field class="example-full-width w-100 mt-3" appearance="fill">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width w-100" appearance="fill">
+      <mat-label>Пароль</mat-label>
+      <input matInput type="password" formControlName="password">
+    </mat-form-field>
+
+    <button mat-flat-button color="primary" class="w-100 mb-2" (click)="onLogin()">Войти</button>
+    <button mat-flat-button class="w-100 mb-2" style="background: #ffffff;color: black;border: 1px solid black;"
+            (click)="notImplemented()">
+      <div class="d-flex justify-content-between align-content-center">
+
+        <span>
+
+        <img src="assets/images/google_logo.png" style="height: 24px; padding-left: 5px;"/>
+        </span>
+        <div class="w-100 text-center">Войти через Google</div>
+      </div>
+    </button>
+    <button mat-flat-button class="w-100 mb-2" style="background: #5181b8;color: white;" (click)="notImplemented()">
+      <div class="d-flex justify-content-between align-content-center">
+
+        <span>
+
+        <img src="assets/images/vk_logo.png" style="height: 30px"/>
+        </span>
+        <div class="w-100 text-center">Войти через Вконтакте</div>
+      </div>
+    </button>
+    <a href="/registration">Первый раз? Зарегистрироваться</a>
+
+  </form>
+  <!--  </div>-->
+</div>
