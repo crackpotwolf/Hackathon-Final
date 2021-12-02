@@ -85,7 +85,7 @@ const DragConfig = {
     ],
   imports: [
     CommonModule,
-    LayoutsModule,
+    // LayoutsModule,
 
     // NG Material Modules
     MatSidenavModule,
