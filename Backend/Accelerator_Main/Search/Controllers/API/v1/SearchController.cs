@@ -31,6 +31,7 @@ namespace Search.Controllers.API.v1
     public class SearchController : ControllerBase
     {
         protected IBaseEntityRepository<Project> _projectRepository;
+        protected IBaseEntityRepository<Order> _ordersRepository;
 
         private readonly ILogger<IndexModel> _logger;
         private readonly PathConfig _pathConfig;
@@ -38,12 +39,38 @@ namespace Search.Controllers.API.v1
         /// <inheritdoc />
         public SearchController(ILogger<IndexModel> logger,
             IBaseEntityRepository<Project> projectRepository,
+            IBaseEntityRepository<Order> ordersRepository,
             IOptions<PathConfig> pathConfig)
         {
             _projectRepository = projectRepository;
+            _ordersRepository = ordersRepository;
             _pathConfig = pathConfig.Value;
             _logger = logger;
         }
+
+        ///// <summary>
+        ///// Список фильтров
+        ///// </summary>
+        ///// <param name="inputText">Текст для поиска</param>
+        ///// <returns>Название файлов с совпадениями в порядке релевантности</returns>
+        //[HttpGet("guids/{inputText}")]
+        //[DisableRequestSizeLimit]
+        //[Produces("application/json")]
+        //[SwaggerResponse(200, "Название файлов с совпадениями в порядке релевантности", typeof(Dictionary<Guid, float>))]
+        //[ProducesResponseType(typeof(Exception), 400)]
+        //public IActionResult Filters()
+        //{
+        //    try
+        //    {
+        //        var stages = _ordersRepository.GetListQuery().Select(p=>p.Stage).Distinct().ToList();
+        //        var certification= _ordersRepository.GetListQuery().Select(p => p.Sertification).Distinct().ToList();
+        //        var peopleCount = _ordersRepository.GetListQuery().Select(p => p.Sertification).Distinct().ToList();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return StatusCode(500, ex);
+        //    }
+        //}
 
         /// <summary>
         /// Поиск объектов по ключевым словам
@@ -59,14 +86,10 @@ namespace Search.Controllers.API.v1
         {
             try
             {
-                _logger.LogInformation($"Начало поиска объектов.");
-
                 // Для замера времени
                 DateTime timeStart = DateTime.UtcNow;
 
                 // Инициализация
-                _logger.LogInformation($"Инициализация.");
-
                 var search = new WordSearch(_pathConfig.DocumentsIndexes, typeof(Project).GetSerachableFieldsNames());
 
                 // Поиск
@@ -75,8 +98,6 @@ namespace Search.Controllers.API.v1
                 var result = search.Search(inputText);
 
                 // Результаты
-                _logger.LogInformation($"Запись результатов. {inputText}");
-
                 _logger.LogInformation($"Запрос: '{result.Query}' всего: {result.TotalHits}. {inputText}");
 
                 Dictionary<Guid, float> results = new Dictionary<Guid, float>();
@@ -115,14 +136,10 @@ namespace Search.Controllers.API.v1
         {
             try
             {
-                _logger.LogInformation($"Начало поиска объектов.");
-
                 // Для замера времени
                 DateTime timeStart = DateTime.UtcNow;
 
                 // Инициализация
-                _logger.LogInformation($"Инициализация.");
-
                 var search = new WordSearch(_pathConfig.DocumentsIndexes, typeof(Project).GetSerachableFieldsNames());
 
                 // Поиск
@@ -131,8 +148,6 @@ namespace Search.Controllers.API.v1
                 var result = search.Search(inputText);
 
                 // Результаты
-                _logger.LogInformation($"Запись результатов. {inputText}");
-
                 _logger.LogInformation($"Запрос: '{result.Query}' всего: {result.TotalHits}. {inputText}");
 
                 var results = _projectRepository.GetListQuery().Where(p => result.Hits.Select(t => t.Guid).Contains(p.Guid))
