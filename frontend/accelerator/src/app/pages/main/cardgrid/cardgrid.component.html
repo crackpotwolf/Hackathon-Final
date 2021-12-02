@@ -1,0 +1,15 @@
+<div *ngFor="let item of data" >
+  <mat-card style="margin: 8px;">
+    <mat-card-title-group>
+      <mat-card-title>{{item.name}}</mat-card-title>
+      <mat-card-subtitle>{{item.companyName}}</mat-card-subtitle>
+    </mat-card-title-group>
+    <mat-card-content>
+      {{item.shortDescription}}
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <button mat-button>LIKE</button>
+      <button mat-button>SHARE</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

@@ -1,0 +1,88 @@
+<div [formGroup]="form">
+  <label [attr.for]="field.key">{{field.label}}</label>
+
+
+  <div [ngSwitch]="field.controlType" [pTooltip]="getErrorMessage()" [tooltipDisabled]="!field.required">
+
+
+    <!--  textbox  -->
+    <input *ngSwitchCase="'textbox'" [formControlName]="field.key" [id]="field.key" [type]="field.type"
+           [ngClass]="{
+          'is-invalid': !isValid
+}" class="form-control" pInputText [value]="field.value" [placeholder]="field.placeholder">
+
+    <!--  dropdown  -->
+    <p-dropdown *ngSwitchCase="'dropdown'" [(ngModel)]="field.value" [formControlName]="field.key"
+                [options]="field.options" optionLabel="value"
+                [filter]="true" filterBy="value" [placeholder]="field.placeholder" class="w-100"
+                styleClass="w-100 {{ !isValid ? 'is-invalid' : ''}}" optionValue="key">
+      <ng-template let-option pTemplate="item">
+        <div class="country-item">
+          <div>{{option.value}}</div>
+        </div>
+      </ng-template>
+    </p-dropdown>
+
+    <!--  datetimepicker  -->
+    <div *ngSwitchCase="'datetimepicker'" class="input-group">
+
+      <input class="form-control" placeholder="Введите дату" [ngModel]="field.value" [formControlName]="field.key"
+             [matDatepicker]="dp" [value]="field.value" [ngClass]="{
+  'is-invalid': !isValid
+}">
+      <div class="input-group-append">
+
+        <div class="input-group-append">
+          <button class="btn btn-primary" type="button" (click)="dp.open()"><i class="fas fa-calendar-day"></i></button>
+        </div>
+      </div>
+      <mat-datepicker #dp></mat-datepicker>
+    </div>
+
+    <!--  input-chips  -->
+    <p-chips *ngSwitchCase="'input-chips'" [(ngModel)]="field.value" [formControlName]="field.key" edit separator=","
+             styleClass="w-100" [placeholder]="field.placeholder"></p-chips>
+
+    <!--  textbox-mask  -->
+    <input *ngSwitchCase="'textbox-mask'" [mask]="field.mask" [placeholder]="field.mask"
+           [formControlName]="field.key" [value]="field.value" class="form-control">
+
+    <!--  textarea  -->
+    <textarea *ngSwitchCase="'textarea'" [rows]="1" pInputTextarea [autoResize]="true" [value]="field.value"
+              [placeholder]="field.placeholder" [formControlName]="field.key" class="w-100" [ngClass]="{
+          'is-invalid': !isValid
+}"></textarea>
+
+
+    <!--  boolean  -->
+    <p-toggleButton *ngSwitchCase="'boolean'" [formControlName]="field.key" [(ngModel)]="field.value"
+                    [onLabel]="field.onLabel"
+                    [offLabel]="field.offLabel" onIcon="pi pi-check" offIcon="pi pi-times"
+                    styleClass="w-100"></p-toggleButton>
+
+    <!-- group checkbox -->
+    <section *ngSwitchCase="'group-checkbox'" [formGroup]="field.value">
+      <!--      <h5>{{field.label}}</h5>-->
+      <div class="p-field-checkbox" *ngFor="let opt of field.options">
+        <mat-checkbox [formControlName]="opt.key.toString()">{{opt.value}}</mat-checkbox>
+        <!--        <p-checkbox [formControlName]="opt.key" value="New York" [(ngModel)]="field.value" inputId="ny"></p-checkbox>-->
+        <!--        <label [for]="opt.key">{{opt.value}}</label>-->
+      </div>
+    </section>
+
+    <!-- range -->
+    <div *ngSwitchCase="'range'">
+      <mat-slider
+        thumbLabel
+        [min]="field.min"
+        [max]="field.max"
+        [formControlName]="field.key"
+        [(ngModel)]="field.value"
+        class="w-100 p-0 my-2"
+        aria-label="units"></mat-slider>
+    </div>
+
+  </div>
+
+  <!--  <div class="errorMessage" *ngIf="!isValid">{{field.label}} is required</div>-->
+</div>
