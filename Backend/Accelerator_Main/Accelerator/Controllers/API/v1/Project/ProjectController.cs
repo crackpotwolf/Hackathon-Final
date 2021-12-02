@@ -50,6 +50,20 @@ namespace Accelerator.Controllers.API.v1.Projects
             _logger = logger;
         }
 
+        [HttpGet]
+        [SwaggerResponse(500, "Неизвестная ошибка")]
+        public async Task<IActionResult> Get(Guid guid)
+        {
+            try
+            {
+                return Ok(_projectsRepository.GetListQuery().FirstOrDefault(p=>p.Guid==guid));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex);
+            }
+        }
+
         [HttpGet("all")]
         [SwaggerResponse(500, "Неизвестная ошибка")]
         public async Task<IActionResult> GetAll()
@@ -73,6 +87,7 @@ namespace Accelerator.Controllers.API.v1.Projects
         [HttpPost("project-creation")]
         [SwaggerResponse(200)]
         [SwaggerResponse(500, "Неизвестная ошибка")]
+        [DisableRequestSizeLimit]
         public IActionResult Creation(List<Project> data)
         {
             var search = new WordSearch(_pathConfig.DocumentsIndexes);
