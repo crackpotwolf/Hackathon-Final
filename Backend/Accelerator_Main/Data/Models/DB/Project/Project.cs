@@ -70,17 +70,38 @@ namespace Data.Models.DB.Project
         public string PathName { get; set; }
 
         /// <summary>
+        /// Тэги
+        /// </summary>
+        public List<string> Tags { get; set; }
+
+        /// <summary>
+        /// Список тэгов в строковом представлении
+        /// </summary>
+        [Searchable]
+        [JsonIgnore]
+        [NotMapped]
+        public string TagsString { get => Tags != null ? String.Join(", ", Tags) : ""; }
+
+        /// <summary>
         /// заявка
         /// </summary>
         public Order Order { get; set; }
 
         /// <summary>
-        /// Поле для индексации заявки
+        /// Поле для индексации заявки (описание)
         /// </summary>
         [Searchable]
         [NotMapped]
         [JsonIgnore]
         public string OrderStringData { get => Order.GetSearchablePropertiesStringifiedValue(); }
+
+        /// <summary>
+        /// Поле для индексации заявки (описание)
+        /// </summary>
+        [Searchable]
+        [NotMapped]
+        [JsonIgnore]
+        public string OrderTeam { get => Order.TeamName; }
 
         public List<Effect> Effects { get; set; }
 
