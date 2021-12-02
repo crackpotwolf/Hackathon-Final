@@ -1,0 +1,7 @@
+location /api/authentication/swagger {
+  proxy_pass http://authentication/swagger;
+}
+
+location /api/authentication/ {
+  proxy_pass http://authentication;
+}
