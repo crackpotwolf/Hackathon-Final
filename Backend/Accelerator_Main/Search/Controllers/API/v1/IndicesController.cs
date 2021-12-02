@@ -20,9 +20,6 @@ namespace Search.Controllers.API.v1
     [ApiVersion("1.0")]
     [DisplayName("indices")]
     [SetRoute]
-#if RELEASE
-    [Authorize]
-#endif
     public class IndicesController : ControllerBase
     {
         protected IBaseEntityRepository<Project> _fullProjectRepository;

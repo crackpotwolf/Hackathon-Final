@@ -25,9 +25,6 @@ namespace Search.Controllers.API.v1
     [ApiVersion("1.0")]
     [DisplayName("search")]
     [SetRoute]
-#if RELEASE
-    [Authorize]
-#endif
     public class SearchController : ControllerBase
     {
         protected IBaseEntityRepository<Project> _projectRepository;
@@ -136,15 +133,15 @@ namespace Search.Controllers.API.v1
                 _logger.LogInformation($"Запрос: '{result.Query}' всего: {result.TotalHits}. {inputText}");
 
                 var results = _projectRepository.GetListQuery().Where(p => result.Hits.Select(t => t.Guid).Contains(p.Guid))
-                    .Include(p=>p.Activities)
-                    .Include(p=>p.Budget)
-                    .Include(p=>p.Effects)
-                    .Include(p=>p.Materials)
-                    .Include(p=>p.Meetings)
-                    .Include(p=>p.Order)
-                    .Include(p=>p.Stages)
-                    .Include(p=>p.Statuses)
-                    .Include(p=>p.Teams)
+                    .Include(p => p.Activities)
+                    .Include(p => p.Budget)
+                    .Include(p => p.Effects)
+                    .Include(p => p.Materials)
+                    .Include(p => p.Meetings)
+                    .Include(p => p.Order)
+                    .Include(p => p.Stages)
+                    .Include(p => p.Statuses)
+                    .Include(p => p.Teams)
                     .ToList();
 
                 _logger.LogInformation($"Поиск завершен за: {(DateTime.UtcNow - timeStart).TotalSeconds} секунд. {inputText}");

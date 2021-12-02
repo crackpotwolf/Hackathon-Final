@@ -40,7 +40,12 @@ namespace Accelerator
             var curProjectName = $"{Assembly.GetExecutingAssembly().GetName().Name}";
 
             // Swagger docs
-            services.AddSwagger(curProjectName);
+            services.AddSwagger(curProjectName, c =>
+            {
+                c.AddXmlComments("Accelerator", curProjectName);
+                c.AddXmlComments("Data", curProjectName);
+                c.AddXmlComments("Data_Path", curProjectName);
+            });
 
             #endregion
 

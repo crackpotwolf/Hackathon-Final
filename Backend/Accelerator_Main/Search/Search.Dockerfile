@@ -5,8 +5,7 @@ EXPOSE 80
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 
 WORKDIR /src
-COPY ["Search/Search.csproj", "Accelerator/"]
-
+COPY ["Search/Search.csproj", "Search/"]
 COPY ["Data/Data.csproj", "Data/"]
 COPY ["Search_Data/Search_Data.csproj", "Search_Data/"]
 COPY ["Data_Path/Data_Path.csproj", "Data_Path/"]

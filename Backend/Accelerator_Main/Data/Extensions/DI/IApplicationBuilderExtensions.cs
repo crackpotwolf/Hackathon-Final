@@ -1,4 +1,5 @@
-﻿using Data.Middleware;
+﻿using Data.Extensions.Reflection;
+using Data.Middleware;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -55,13 +56,13 @@ namespace Data.Extensions.DI
             #region Middleware
 
             app.UseMiddleware<LoggingMiddleware>();
-            
+
             #endregion
 
             #region Swagger
-            
+
             app.UseSwaggerService(provider);
-            
+
             #endregion
 
             app.UseCors(builder =>
@@ -75,7 +76,7 @@ namespace Data.Extensions.DI
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "test/{controller:slugify}/{action:slugify}/{id?}");
+                    pattern: "{controller:slugify}/{action:slugify}/{id?}");
             });
         }
 
@@ -98,7 +99,7 @@ namespace Data.Extensions.DI
         private static void UseSwaggerService(this IApplicationBuilder app, IApiVersionDescriptionProvider provider)
         {
             var isDevelopment = app.ApplicationServices.GetService<IWebHostEnvironment>().IsDevelopment();
-            string prefixApi = isDevelopment ? "" : $"/api/{Assembly.GetEntryAssembly().GetName().Name.ToLower()}";
+            string prefixApi = isDevelopment ? "" : $"/api/{Assembly.GetEntryAssembly().GetName().GetNameDashCase()}";
 
             app.UseSwagger();
 

@@ -6,6 +6,7 @@ using Data.Models.DB.Project;
 using Data.Models.Services;
 using Data.Services.Account;
 using Data_Path.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Scaffolding.Metadata;
@@ -23,9 +24,6 @@ namespace Accelerator.Controllers.API.v1.Projects
     [ApiVersion("1.0")]
     [DisplayName("project")]
     [SetRoute]
-#if RELEASE
-    [Authorize]
-#endif
     public class ProjectController : ControllerBase
     {
         protected IBaseEntityRepository<Project> _projectsRepository;

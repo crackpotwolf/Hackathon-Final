@@ -1,7 +1,7 @@
 location /api/search/swagger {
-  proxy_pass http://search/swagger;
+  proxy_pass http://accelerator-search/swagger;
 }
 
 location /api/search/ {
-  proxy_pass http://search;
+  proxy_pass http://accelerator-search;
 }
