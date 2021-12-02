@@ -1,0 +1,7 @@
+location /api/parse-documents/swagger {
+  proxy_pass http://parse-documents/swagger;
+}
+
+location /api/parse-documents/ {
+  proxy_pass http://parse-documents;
+}
