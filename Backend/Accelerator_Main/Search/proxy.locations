@@ -1,0 +1,7 @@
+location /api/search/swagger {
+  proxy_pass http://search/swagger;
+}
+
+location /api/search/ {
+  proxy_pass http://search;
+}
