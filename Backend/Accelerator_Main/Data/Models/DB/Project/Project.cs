@@ -19,6 +19,7 @@ namespace Data.Models.DB.Project
         /// <summary>
         /// Наименование проекта
         /// </summary>
+        [Searchable]
         public string Name { get; set; }
 
         /// <summary>
@@ -49,6 +50,7 @@ namespace Data.Models.DB.Project
         /// <summary>
         /// Краткое описание продукта
         /// </summary>
+        [Searchable]
         public string ShortDescription { get; set; }
 
         /// <summary>
@@ -59,6 +61,7 @@ namespace Data.Models.DB.Project
         /// <summary>
         /// КОНТЕКСТ И ПОТРЕБНОСТИ
         /// </summary>
+        [Searchable]
         public string Context { get; set; }
 
         /// <summary>
@@ -70,6 +73,14 @@ namespace Data.Models.DB.Project
         /// заявка
         /// </summary>
         public Order Order { get; set; }
+
+        /// <summary>
+        /// Поле для индексации заявки
+        /// </summary>
+        [Searchable]
+        [NotMapped]
+        [JsonIgnore]
+        public string OrderStringData { get => Order.GetSearchablePropertiesStringifiedValue(); }
 
         public List<Effect> Effects { get; set; }
 

@@ -30,17 +30,17 @@ namespace Search.Controllers.API.v1
 #endif
     public class SearchController : ControllerBase
     {
-        protected IBaseEntityRepository<Project> _fullProjectRepository;
+        protected IBaseEntityRepository<Project> _projectRepository;
 
         private readonly ILogger<IndexModel> _logger;
         private readonly PathConfig _pathConfig;
 
         /// <inheritdoc />
         public SearchController(ILogger<IndexModel> logger,
-            IBaseEntityRepository<Project> fullProjectRepository,
+            IBaseEntityRepository<Project> projectRepository,
             IOptions<PathConfig> pathConfig)
         {
-            _fullProjectRepository = fullProjectRepository;
+            _projectRepository = projectRepository;
             _pathConfig = pathConfig.Value;
             _logger = logger;
         }
@@ -135,7 +135,17 @@ namespace Search.Controllers.API.v1
 
                 _logger.LogInformation($"Запрос: '{result.Query}' всего: {result.TotalHits}. {inputText}");
 
-                var results = _fullProjectRepository.GetListQuery().Where(p => result.Hits.Select(t => t.Guid).Contains(p.Guid)).ToList();
+                var results = _projectRepository.GetListQuery().Where(p => result.Hits.Select(t => t.Guid).Contains(p.Guid))
+                    .Include(p=>p.Activities)
+                    .Include(p=>p.Budget)
+                    .Include(p=>p.Effects)
+                    .Include(p=>p.Materials)
+                    .Include(p=>p.Meetings)
+                    .Include(p=>p.Order)
+                    .Include(p=>p.Stages)
+                    .Include(p=>p.Statuses)
+                    .Include(p=>p.Teams)
+                    .ToList();
 
                 _logger.LogInformation($"Поиск завершен за: {(DateTime.UtcNow - timeStart).TotalSeconds} секунд. {inputText}");
 
