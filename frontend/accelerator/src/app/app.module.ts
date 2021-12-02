@@ -63,9 +63,9 @@ export function createTranslateLoader(http: HttpClient): any {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpErrorInterceptor,
       multi: true
-    },
+    }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 
 export class AppModule implements OnInit {

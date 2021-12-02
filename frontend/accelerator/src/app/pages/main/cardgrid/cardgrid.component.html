@@ -1,15 +1,39 @@
-<div *ngFor="let item of data" >
-  <mat-card style="margin: 8px;">
-    <mat-card-title-group>
-      <mat-card-title>{{item.name}}</mat-card-title>
-      <mat-card-subtitle>{{item.companyName}}</mat-card-subtitle>
-    </mat-card-title-group>
-    <mat-card-content>
-      {{item.shortDescription}}
-    </mat-card-content>
-    <mat-card-actions align="end">
-      <button mat-button>LIKE</button>
-      <button mat-button>SHARE</button>
-    </mat-card-actions>
-  </mat-card>
+<div class="card">
+  <p-dataView #dv [value]="projects" [paginator]="true" [rows]="9" filterBy="name"
+              [sortField]="sortField" [sortOrder]="sortOrder" layout="grid">
+
+    <ng-template pTemplate="header">
+      <div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between">
+        <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+      </div>
+    </ng-template>
+
+    <ng-template let-project pTemplate="listItem">
+
+      <div class="p-col-12">
+        <div class="product-list-item">
+          <div class="product-list-detail">
+            <div class="product-name">{{project.name}}</div>
+            <div class="product-description">{{project.shortDescription}}</div>
+          </div>
+          <div class="product-list-action">
+          </div>
+        </div>
+      </div>
+
+    </ng-template>
+    <ng-template let-project pTemplate="gridItem">
+
+      <div class="p-col-12 p-md-4">
+        <div class="product-grid-item card">
+          <div class="product-grid-item-content">
+            <div class="product-name">{{project.name}}</div>
+            <div class="product-description">{{project.shortDescription}}</div>
+          </div>
+        </div>
+      </div>
+
+    </ng-template>
+
+  </p-dataView>
 </div>

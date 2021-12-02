@@ -5,6 +5,11 @@ import {TypeFilter} from "./Data/type-filter";
 import {CheckboxField} from "../dynamic-forms/entities/checkbox";
 import {GroupCheckboxField} from "../dynamic-forms/entities/group-checkbox";
 import {RangeField} from "../dynamic-forms/entities/range";
+import {HttpClient} from "@angular/common/http";
+import {ProjectsService} from "../../services/projects.service";
+import {ProjectServiceEventData} from "../../services/data/ProjectServiceEventData";
+import {ProjectServiceEventType} from "../../services/data/ProjectServiceEventType";
+import {Project} from "../../data/Project";
 
 @Component({
   selector: 'app-filter',
@@ -15,12 +20,26 @@ export class FilterComponent implements OnInit {
   formFields: FormFieldBase<any>[] = [];
   form!: FormGroup;
 
-  constructor() {
-    this.loadingFilters();
-    console.log(this.formFields);
+  constructor(private http: HttpClient,
+              private projectsService: ProjectsService) {
+    this.projectsService.onEvents.subscribe((e) => this.onEventProjectSevice(e));
   }
 
   ngOnInit(): void {
+  }
+
+
+  /**
+   * Обработка событий сервиса проектов
+   * @param e
+   * @private
+   */
+  private onEventProjectSevice(e: ProjectServiceEventData) {
+    switch (e.type) {
+      case ProjectServiceEventType.LoadingComplete:
+        this.loadingFilters(e.data);
+        break;
+    }
   }
 
   /**
@@ -37,22 +56,35 @@ export class FilterComponent implements OnInit {
    * Загрузка фильтров
    * @private
    */
-  private loadingFilters() {
+  private loadingFilters(allProjects: Project[]) {
+    console.log(allProjects);
     //TODO: Сделать загрузку из БД
-    let filters = {
-      "Фильтр 1": {
+    let filters = [
+      {
+        name: "Стадия готовности",
+        key: 'order.stage',
         type: TypeFilter.checkbox,
         values: [{key: "1", value: "Значение 1"}, {key: "2", value: "Значение 2"}]
       },
-      "Фильтр 2": {
+      {
+        name: "Cертификация",
+        key: 'order.sertification',
         type: TypeFilter.checkbox,
         values: [{key: "3", value: "Значение 3"}, {key: "4", value: "Значение 4"}, {key: "5", value: "Вова лол"}]
       },
-      "Фильтр для Вовы": {
+      {
+        name: "Сколько человек в организации",
+        key: 'order.peopleCount',
         type: TypeFilter.range,
         values: {min: 0, max: 100}
       },
-    };
+      {
+        name: "Сроки реализации",
+        key: 'timing',
+        type: TypeFilter.range,
+        values: {min: 0, max: 100}
+      },
+    ];
     this.setFormField(filters);
   }
 
@@ -62,16 +94,15 @@ export class FilterComponent implements OnInit {
    * @private
    */
   private setFormField(filters: any) {
-    for (const filterName of Object.keys(filters)) {
-      let filter = filters[filterName];
+    for (const filter of filters) {
       switch (filter.type) {
         case TypeFilter.checkbox:
-          this.formFields.push(new GroupCheckboxField({label: filterName, key: filterName, options: filter.values}));
+          this.formFields.push(new GroupCheckboxField({label: filter.name, key: filter.key, options: filter.values}));
           break;
         case TypeFilter.range:
           this.formFields.push(new RangeField({
-            label: filterName,
-            key: filterName,
+            label: filter.name,
+            key: filter.key,
             value: 58,
             min: filter.values.min,
             max: filter.values.max
