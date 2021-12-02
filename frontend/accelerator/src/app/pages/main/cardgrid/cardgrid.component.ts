@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
-import {ProjectService} from "./services/projectservices";
 import {SelectItem} from 'primeng/api';
 import { PrimeNGConfig } from 'primeng/api';
+import {ProjectsService} from "../../../services/projects.service";
+import {ProjectServiceEventData} from "../../../services/data/ProjectServiceEventData";
+import {ProjectServiceEventType} from "../../../services/data/ProjectServiceEventType";
 
 @Component({
   selector: 'app-cardgrid',
@@ -19,12 +21,13 @@ export class CardgridComponent implements OnInit {
 
   sortField: string;
 
-  constructor(private projectService: ProjectService, private http: HttpClient,
-              private primengConfig: PrimeNGConfig) { }
+  constructor(private projectsService: ProjectsService, private http: HttpClient,
+              private primengConfig: PrimeNGConfig) {
+
+    this.projectsService.onEvents.subscribe((e) => this.onEventProjectSevice(e));
+  }
 
   ngOnInit(): void {
-    this.projectService.getProjects().then(data => this.projects = data);
-
     this.sortOptions = [
       {label: 'Price High to Low', value: '!price'},
       {label: 'Price Low to High', value: 'price'}
@@ -43,6 +46,19 @@ export class CardgridComponent implements OnInit {
     else {
       this.sortOrder = 1;
       this.sortField = value;
+    }
+  }
+
+  /**
+   * Обработка событий сервиса проектов
+   * @param e
+   * @private
+   */
+  private onEventProjectSevice(e: ProjectServiceEventData) {
+    switch (e.type) {
+      case ProjectServiceEventType.LoadingComplete:
+        this.projects = e.data;
+        break;
     }
   }
 }

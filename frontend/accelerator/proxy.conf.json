@@ -1,12 +1,6 @@
 {
-  "/api/authentication/*": {
-    "target": "http://localhost:7001",
-    "secure": false,
-    "logLevel": "debug",
-    "changeOrigin": true
-  },
-  "/api/accelerator/*": {
-    "target": "http://localhost:7002",
+  "/api/*": {
+    "target": "http://51.250.1.24:5000",
     "secure": false,
     "logLevel": "debug",
     "changeOrigin": true

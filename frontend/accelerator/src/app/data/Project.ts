@@ -9,7 +9,7 @@ import {Activities} from "./Activities";
 import {Meeting} from "./Meeting";
 import {Material} from "./Material";
 
-export interface Employee {
+export interface Project {
   // Наименование проекта
   name: string;
   // Организация транспортного комплекса Москвы
