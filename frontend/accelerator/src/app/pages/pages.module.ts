@@ -58,6 +58,7 @@ import {DynamicFormComponent} from "../components/dynamic-forms/dynamic-form/dyn
 import {DynamicFormControlService} from "../components/dynamic-forms/dynamic-form-control-service.service";
 import {ButtonModule} from 'primeng/button';
 import {RequestForInnovationComponent} from './request-for-innovation/request-for-innovation.component';
+import { ProjectComponent } from './project/project.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -78,7 +79,8 @@ const DragConfig = {
       FilterComponent,
       DynamicFormFieldComponent,
       DynamicFormComponent,
-      RequestForInnovationComponent
+      RequestForInnovationComponent,
+      ProjectComponent
     ],
   imports: [
     CommonModule,

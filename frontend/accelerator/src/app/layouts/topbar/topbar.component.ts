@@ -40,7 +40,7 @@ export class TopbarComponent implements OnInit {
   //   event.preventDefault();
   //   this.mobileMenuButtonClicked.emit();
   // }
-  displaySidebar: boolean = true;
+  displaySidebar: boolean = false;
 
   /**
    * Выход
