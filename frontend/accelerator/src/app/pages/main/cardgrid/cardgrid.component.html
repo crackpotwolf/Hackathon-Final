@@ -10,31 +10,32 @@
 
   <ng-template let-project pTemplate="listItem">
 
-    <div class="p-col-12">
-      <div class="product-list-item">
-        <div class="product-list-detail">
-          <div class="product-name">{{project.name}}</div>
-        </div>
-        <div class="product-list-action">
-        </div>
-      </div>
-    </div>
-
-  </ng-template>
-  <ng-template let-project pTemplate="gridItem">
-
-    <li class="cards_item">
-      <div class="card">
+    <div class="cards_list">
+      <a href="#" class="card">
         <div class="card_content">
           <hr/>
           <h2 class="card_title">{{project.name}}</h2>
           <p class="card_status">Статус</p>
           <p class="card_text">{{project.shortDescription}}</p>
         </div>
-
         <div *ngIf="project.relevance" class="relevance text-xs">{{project.relevance.toFixed(2)}}</div>
-      </div>
-    </li>
+      </a>
+    </div>
+
+  </ng-template>
+  <ng-template let-project pTemplate="gridItem">
+
+    <div class="cards_item">
+      <a href="#" class="card">
+        <div class="card_content">
+          <hr/>
+          <h2 class="card_title">{{project.name}}</h2>
+          <p class="card_status">{{project.order.stage}}</p>
+          <p class="card_text">{{project.shortDescription}}</p>
+        </div>
+        <div *ngIf="project.relevance" class="relevance text-xs">{{project.relevance.toFixed(2)}}</div>
+      </a>
+    </div>
 
   </ng-template>
 </p-dataView>

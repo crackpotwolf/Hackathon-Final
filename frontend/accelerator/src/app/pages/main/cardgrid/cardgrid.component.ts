@@ -9,7 +9,7 @@ import {Project} from "../../../data/Project";
 @Component({
   selector: 'app-cardgrid',
   templateUrl: './cardgrid.component.html',
-  styleUrls: ['./cardgrid.component.css']
+  styleUrls: ['./cardgrid.component.scss']
 })
 export class CardgridComponent implements OnInit {
 
