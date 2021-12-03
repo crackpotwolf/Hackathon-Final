@@ -27,6 +27,8 @@ namespace Accelerator.Controllers.API.v1.Projects
     public class ProjectController : ControllerBase
     {
         protected IBaseEntityRepository<Project> _projectsRepository;
+        protected IBaseEntityRepository<Company> _companiesRepository;
+        protected IBaseEntityRepository<Recomendation> _recomendationsRepository;
 
         protected readonly EmailService _emailService;
         private readonly ILogger<IndexModel> _logger;
@@ -36,6 +38,8 @@ namespace Accelerator.Controllers.API.v1.Projects
 
         public ProjectController(
             IBaseEntityRepository<Project> projectsRepository,
+            IBaseEntityRepository<Company> companiesRepository,
+            IBaseEntityRepository<Recomendation> recomendationsRepository,
             IOptions<PathConfig> pathConfig,
             ILogger<IndexModel> logger,
             EmailService emailService,
@@ -43,6 +47,8 @@ namespace Accelerator.Controllers.API.v1.Projects
             IMapper mapper)
         {
             _projectsRepository = projectsRepository;
+            _companiesRepository = companiesRepository;
+            _recomendationsRepository = recomendationsRepository;
             _pathConfig = pathConfig.Value;
             _emailService = emailService;
             _userManager = userManager;
@@ -88,6 +94,57 @@ namespace Accelerator.Controllers.API.v1.Projects
             }
         }
 
+        [HttpGet("get-companies/{guid}")]
+        public IActionResult GetCompanies(Guid guid)
+        {
+            try
+            {
+                return Ok(_companiesRepository.GetListQuery().Where(p => p.ProjectGuid == guid).DistinctBy(p=>p.Name).ToList());
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex);
+            }
+        }
+
+        [HttpPost("post-companies")]
+        public IActionResult PostCompanies(Company data)
+        {
+            try
+            {
+                return Ok(_companiesRepository.Add(data));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex);
+            }
+        }
+
+        [HttpGet("get-recomendations/{guid}")]
+        public IActionResult GetRecomendations(Guid guid)
+        {
+            try
+            {
+                return Ok(_recomendationsRepository.GetListQuery().Where(p => p.ProjectGuid == guid).ToList());
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex);
+            }
+        }
+
+        [HttpGet("post-recomendations/{guid}")]
+        public IActionResult PostRecomendations(Recomendation data)
+        {
+            try
+            {
+                return Ok(_recomendationsRepository.Add(data));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex);
+            }
+        }
 
         /// <summary>
         /// Для загрузки проектов в бд одним объектом
