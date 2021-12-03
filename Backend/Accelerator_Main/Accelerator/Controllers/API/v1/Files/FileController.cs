@@ -346,10 +346,10 @@ namespace Accelerator.Controllers.API.v1.Files
                 }
 
                 // Путь к заявки
-                var niokrPath = Path.Combine(GetPathDocumentation(), documentInfo.PathName);
+                var projectPath = Path.Combine(GetPathDocumentation(), documentInfo.PathName);
 
                 // Путь к документу
-                var documentPath = Path.Combine(niokrPath, documentInfo.PathName);
+                var documentPath = Path.Combine(projectPath, documentInfo.PathName);
 
                 // Удалить все файлы данного документа
                 DeleteFolder(documentPath);
@@ -378,7 +378,7 @@ namespace Accelerator.Controllers.API.v1.Files
         /// </summary>
         /// <param name="projectGuid">Guid заявки</param>
         /// <returns></returns>
-        [HttpGet("info/niokr/{niokrGuid:guid}")]
+        [HttpGet("info/project/{projectGuid:guid}")]
         [Produces("application/json")]
         [SwaggerResponse(200, "Информация о файлах заявки", typeof(List<DocumentInfo>))]
         [ProducesResponseType(typeof(Exception), 400)]
@@ -476,7 +476,7 @@ namespace Accelerator.Controllers.API.v1.Files
         /// </summary>
         /// <param name="documentInfoGuid">Guid документа</param>
         /// <returns></returns>
-        [HttpGet("info/niokr/files/{documentInfoGuid:guid}/version")]
+        [HttpGet("info/project/files/{documentInfoGuid:guid}/version")]
         [Produces("application/json")]
         [SwaggerResponse(200, "Информация о файлах заявки", typeof(List<FIleVersionView>))]
         [ProducesResponseType(typeof(Exception), 400)]

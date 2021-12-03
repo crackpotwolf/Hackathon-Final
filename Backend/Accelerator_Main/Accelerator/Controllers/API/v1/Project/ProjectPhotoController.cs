@@ -19,6 +19,7 @@ namespace Accelerator.Controllers.API.v1
     /// <summary>
     /// API для фото
     /// </summary>
+    [ApiController]
     [ApiVersion("1.0")]
     [DisplayName("project-photos")]
     [SetRoute]
