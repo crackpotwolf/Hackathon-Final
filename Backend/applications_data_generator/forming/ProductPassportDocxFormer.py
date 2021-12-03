@@ -54,11 +54,11 @@ class ProductPassportDocxFormer:
     #
     subtitle_3 = document.add_paragraph('Ожидаемые эффекты проекта'.upper()).bold = True
     # добавляем таблицу
-    table_3 = document.add_table(rows=len(product_passport_generator.effects), cols=3)
+    table_3 = document.add_table(rows=len(product_passport_generator.effects)+1, cols=3+1)
     # применяем стиль для таблицы
     table_3.style = 'Table Grid'
     # заполняем таблицу данными
-    for num_row in range(len(product_passport_generator.effects)):
+    for num_row in range(1, len(product_passport_generator.effects)):
       table_3.cell(num_row, 0).text  = str(num_row+1)
       table_3.cell(num_row, 1).text  = product_passport_generator.effects[num_row]["name"]
       table_3.cell(num_row, 2).text  = product_passport_generator.effects[num_row]["value"]
