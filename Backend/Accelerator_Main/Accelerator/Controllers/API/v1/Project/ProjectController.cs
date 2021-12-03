@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Data;
 using Data.Attributes;
 using Data.Extensions;
 using Data.Interfaces.Repositories;
@@ -35,8 +36,10 @@ namespace Accelerator.Controllers.API.v1.Projects
         protected readonly UserManager _userManager;
         private readonly PathConfig _pathConfig;
         protected readonly IMapper _mapper;
+        protected readonly AcceleratorContext _db;
 
         public ProjectController(
+            AcceleratorContext db,
             IBaseEntityRepository<Project> projectsRepository,
             IBaseEntityRepository<Company> companiesRepository,
             IBaseEntityRepository<Recomendation> recomendationsRepository,
@@ -54,6 +57,7 @@ namespace Accelerator.Controllers.API.v1.Projects
             _userManager = userManager;
             _mapper = mapper;
             _logger = logger;
+            _db = db;
         }
 
         [HttpGet]
@@ -63,16 +67,16 @@ namespace Accelerator.Controllers.API.v1.Projects
             try
             {
                 return Ok(_projectsRepository.GetListQuery()
-                    .Include(p=>p.Activities)
-                    .Include(p=>p.Budget)
-                    .Include(p=>p.Effects)
-                    .Include(p=>p.Materials)
-                    .Include(p=>p.Meetings)
-                    .Include(p=>p.Order)
-                    .Include(p=>p.Stages)
-                    .Include(p=>p.Statuses)
-                    .Include(p=>p.Teams)
-                    .FirstOrDefault(p=>p.Guid==guid));
+                    .Include(p => p.Activities)
+                    .Include(p => p.Budget)
+                    .Include(p => p.Effects)
+                    .Include(p => p.Materials)
+                    .Include(p => p.Meetings)
+                    .Include(p => p.Order)
+                    .Include(p => p.Stages)
+                    .Include(p => p.Statuses)
+                    .Include(p => p.Teams)
+                    .FirstOrDefault(p => p.Guid == guid));
             }
             catch (Exception ex)
             {
@@ -80,13 +84,54 @@ namespace Accelerator.Controllers.API.v1.Projects
             }
         }
 
+        [HttpGet("lite")]
+        [SwaggerResponse(500, "Неизвестная ошибка")]
+        public async Task<IActionResult> GetLite(Guid guid)
+        {
+            try
+            {
+                return Ok(_projectsRepository.GetListQuery()
+                    .Include(p => p.Order)
+                    .FirstOrDefault(p => p.Guid == guid));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex);
+            }
+        }
+
+        [HttpGet("activities")]
+        public async Task<IActionResult> GetActivities(Guid projectGuid) => Ok(_db.Activities.Where(p => p.ProjectGuid == projectGuid));
+
+        [HttpGet("budget")]
+        public async Task<IActionResult> GetBudgets(Guid projectGuid) => Ok(_db.Budgets.Where(p => p.ProjectGuid == projectGuid));
+
+        [HttpGet("effects")]
+        public async Task<IActionResult> GetEffects(Guid projectGuid) => Ok(_db.Effects.Where(p => p.ProjectGuid == projectGuid));
+
+        [HttpGet("materials")]
+        public async Task<IActionResult> GetMaterials(Guid projectGuid) => Ok(_db.Materials.Where(p => p.ProjectGuid == projectGuid));
+
+        [HttpGet("meetings")]
+        public async Task<IActionResult> GetMeetings(Guid projectGuid) => Ok(_db.Meetings.Where(p => p.ProjectGuid == projectGuid));
+
+        [HttpGet("stages")]
+        public async Task<IActionResult> GetStages(Guid projectGuid) => Ok(_db.Stages.Where(p => p.ProjectGuid == projectGuid));
+
+        [HttpGet("statuses")]
+        public async Task<IActionResult> GetStatuses(Guid projectGuid) => Ok(_db.Statuses.Where(p => p.ProjectGuid == projectGuid));
+
+        [HttpGet("teams")]
+        public async Task<IActionResult> GetTeams(Guid projectGuid) => Ok(_db.Teams.Where(p => p.ProjectGuid == projectGuid));
+
+
         [HttpGet("all")]
         [SwaggerResponse(500, "Неизвестная ошибка")]
         public async Task<IActionResult> GetAll()
         {
             try
             {
-                return Ok(await _projectsRepository.GetListQuery().Include(p=>p.Order).ToListAsync());
+                return Ok(await _projectsRepository.GetListQuery().Include(p => p.Order).ToListAsync());
             }
             catch (Exception ex)
             {
@@ -99,7 +144,7 @@ namespace Accelerator.Controllers.API.v1.Projects
         {
             try
             {
-                return Ok(_companiesRepository.GetListQuery().Where(p => p.ProjectGuid == guid).DistinctBy(p=>p.Name).ToList());
+                return Ok(_companiesRepository.GetListQuery().Where(p => p.ProjectGuid == guid).DistinctBy(p => p.Name).ToList());
             }
             catch (Exception ex)
             {

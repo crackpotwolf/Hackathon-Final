@@ -14,11 +14,11 @@
   <ng-template let-project pTemplate="listItem">
 
     <div class="cards_list">
-      <a href="#" class="card">
+      <a href="project/{{project.guid}}" class="card">
         <div class="card_content">
           <hr/>
           <h2 class="card_title">{{project.name}}</h2>
-          <p class="card_status">Статус</p>
+          <p class="card_status green">{{project.order.stage}}</p>
           <p class="card_text">{{project.shortDescription}}</p>
         </div>
         <div *ngIf="project.relevance" class="relevance text-xs">{{project.relevance.toFixed(2)}}</div>
@@ -29,11 +29,11 @@
   <ng-template let-project pTemplate="gridItem">
 
     <div class="cards_item">
-      <a href="#" class="card">
+      <a href="project/{{project.guid}}" class="card">
         <div class="card_content">
           <hr/>
           <h2 class="card_title">{{project.name}}</h2>
-          <p class="card_status">{{project.order.stage}}</p>
+          <p class="card_status green">{{project.order.stage}}</p>
           <p class="card_text">{{project.shortDescription}}</p>
         </div>
         <div *ngIf="project.relevance" class="relevance text-xs">{{project.relevance.toFixed(2)}}</div>

@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
+import {HttpClient} from "@angular/common/http";
+import {Project} from "../../data/Project";
 
 @Component({
   selector: 'app-project',
@@ -8,8 +10,12 @@ import {ActivatedRoute} from "@angular/router";
 })
 export class ProjectComponent implements OnInit {
 
+  project: Project;
+  isError: boolean = false;
+
   constructor(
     private route: ActivatedRoute,
+    private http: HttpClient,
   ) {
     let guidProject = this.route.snapshot.paramMap.get('guid');
     console.log(guidProject);
@@ -26,6 +32,11 @@ export class ProjectComponent implements OnInit {
    * @private
    */
   private loadProject(guidProject: string | null) {
-
+    this.http.get<Project>(`/api/accelerator/v1/project?guid=${guidProject}`)
+      .subscribe(resp => {
+        this.project = resp;
+      }, err => {
+        this.isError = true;
+      });
   }
 }

@@ -1,1 +1,15 @@
-<p>project works!</p>
+<div *ngIf="isError" class="text-center" style="min-height: 300px;">
+  <span class="center">
+
+  Проект не найден
+  </span>
+</div>
+<div *ngIf="!isError" style="min-height: 300px;">
+  <div *ngIf="!project" class="center">
+    <p-progressSpinner></p-progressSpinner>
+  </div>
+  <div *ngIf="project">
+
+
+  </div>
+</div>

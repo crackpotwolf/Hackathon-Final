@@ -74,10 +74,10 @@ export class FilterComponent implements OnInit {
           name: "Сколько человек в организации",
           key: 'order.peopleCount',
           type: TypeFilter.checkbox,
-          values: [{key: "3", value: "Менее 20"},
-            {key: "4", value: "От 20 до 100"},
-            {key: "5", value: "От 100 до 500"},
-            {key: "5", value: "Более 500"}]
+          values: [{key: "Менее 20", value: "Менее 20"},
+            {key: "от 20 до 100", value: "От 20 до 100"},
+            {key: "от 100 до 500", value: "От 100 до 500"},
+            {key: "более 500", value: "Более 500"}]
         });
       this.addTagsFilter(allProjects);
       this.setFormField();
