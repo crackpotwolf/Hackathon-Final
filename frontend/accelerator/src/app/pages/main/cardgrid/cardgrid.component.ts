@@ -87,6 +87,9 @@ export class CardgridComponent implements OnInit {
         this.projectIsLoading = false;
         this.foundProjects = e.data;
         break;
+      case ProjectServiceEventType.ClearSearch:
+        this.foundProjects = undefined;
+        break;
       case ProjectServiceEventType.ClearFilters:
         this.filtresProjects = undefined;
         this.projectsService.onEvents.emit(new ProjectServiceEventData({

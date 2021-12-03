@@ -40,4 +40,14 @@ export enum ProjectServiceEventType {
    */
   onClickFavorites,
 
+  /**
+   * Заявка на инновацию отправлена
+   */
+  SendRequestInvest,
+
+  /**
+   * Строка поиска очищена
+   */
+  ClearSearch
+
 }

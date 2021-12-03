@@ -36,6 +36,9 @@ export class SearchComponent implements OnInit {
   onInputFilter(event: Event) {
     if (!this.textGlobalSearch) {
       clearTimeout(this.timeoutTimer);
+      this.projectsService.onEvents.emit(new ProjectServiceEventData({
+        type: ProjectServiceEventType.ClearSearch
+      }));
       return;
     }
 
@@ -44,7 +47,7 @@ export class SearchComponent implements OnInit {
       this.projectsService.onEvents.emit(new ProjectServiceEventData({
         type: ProjectServiceEventType.RunninSearchByGlobal,
         data: this.textGlobalSearch
-      }))
+      }));
     }, 1000);
 
 

@@ -2,9 +2,10 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {AuthService} from "../../../services/auth/auth.service";
 import {MessageService} from "primeng/api";
-import {AppComponent} from "../../app.component";
-import {AppModule} from "../../app.module";
 import {WrapperComponent} from "../wrapper/wrapper.component";
+import {ProjectsService} from "../../../services/projects/projects.service";
+import {ProjectServiceEventData} from "../../../services/projects/data/ProjectServiceEventData";
+import {ProjectServiceEventType} from "../../../services/projects/data/ProjectServiceEventType";
 
 
 @Component({
@@ -27,7 +28,9 @@ export class TopbarComponent implements OnInit {
 
   constructor(private http: HttpClient,
               private messageService: MessageService,
-              private authService: AuthService,) {
+              private authService: AuthService,
+              private projectsService: ProjectsService) {
+    this.projectsService.onEvents.subscribe(p => this.onEvents(p));
   }
 
   ngOnInit(): void {
@@ -72,5 +75,13 @@ export class TopbarComponent implements OnInit {
    */
   onClickRequestForInnovation(event: MouseEvent) {
 
+  }
+
+  private onEvents(p: ProjectServiceEventData) {
+    switch (p.type) {
+      case ProjectServiceEventType.SendRequestInvest:
+        this.displaySidebar = false;
+        break;
+    }
   }
 }
