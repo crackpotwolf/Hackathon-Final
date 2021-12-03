@@ -26,6 +26,10 @@ export class FormFieldBase<T> {
    */
   label: string;
   /**
+   * Двоеточие после label
+   */
+  colon: boolean;
+  /**
    * Описание поля - будет размещено под полем ввода
    */
   subLabel: string;
@@ -128,6 +132,7 @@ export class FormFieldBase<T> {
     offLabel?: string,
     onChange?: (currentValue: any) => void,
     convertLineBreaks?: boolean,
+    colon?: boolean,
   } = {}) {
     this.value = options.value || undefined;
     this.min = options.min || undefined;
@@ -148,6 +153,7 @@ export class FormFieldBase<T> {
     this.onLabel = options.onLabel || '';
     this.offLabel = options.offLabel || '';
     this.onChange = options.onChange;
+    this.colon = options.colon;
 
 
     if (options.convertLineBreaks == undefined || options.convertLineBreaks) {
