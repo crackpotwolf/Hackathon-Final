@@ -27,7 +27,11 @@ export class ProjectsService {
   loadProjects() {
     this.http.get<Project[]>('/api/accelerator/v1/project/all')
       .subscribe(resp => {
-        this.projects = resp;
+        let favorites: any[] = JSON.parse(localStorage.getItem('favorites')) ?? [];
+        this.projects = resp.map(p => {
+          p.isFavorite = favorites.indexOf(p.guid) != -1;
+          return p;
+        });
         this.onEvents.emit(new ProjectServiceEventData({
           type: ProjectServiceEventType.LoadingComplete,
           data: this.projects
@@ -51,6 +55,9 @@ export class ProjectsService {
     switch (e.type) {
       case ProjectServiceEventType.RunninSearchByGlobal:
         this.searchProjectsByGlobalFilter(e.data);
+        break;
+      case ProjectServiceEventType.onClickFavorites:
+        this.changeFavorites(e.data);
         break;
     }
   }
@@ -86,4 +93,19 @@ export class ProjectsService {
       })
   }
 
+  /**
+   * Добавить/удалить проект из избранного
+   * @param guidProject
+   * @private
+   */
+  private changeFavorites(guidProject: string) {
+    let favorites: any[] = JSON.parse(localStorage.getItem('favorites')) ?? [];
+    let indx = favorites.indexOf(guidProject);
+    if (indx != -1) {
+      favorites.splice(indx, 1);
+    } else {
+      favorites.push(guidProject);
+    }
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+  }
 }

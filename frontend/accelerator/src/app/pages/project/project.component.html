@@ -8,8 +8,147 @@
   <div *ngIf="!project" class="center">
     <p-progressSpinner></p-progressSpinner>
   </div>
-  <div *ngIf="project">
+  <div *ngIf="project" class="d-flex flex-column col-10 mx-auto">
+    <div class="d-flex justify-content-between mb-4">
+      <div class="d-flex flex-column">
+        <h3>{{project.name}}</h3>
+        <!--        <div class="d-flex flex-column">-->
+        <div class="d-flex"><span class="mr-2">Срок релизации, месяцев:</span><h5>{{project.timingMonths}}</h5></div>
+        <div class="d-flex"><span class="mr-2">Бюджет:</span><h5>{{project.totalBudget}} тыс. руб.</h5></div>
+        <div class="d-flex"><span class="mr-2">Руководитель:</span><h5>{{project.leader}}</h5></div>
+        <!--        </div>-->
+      </div>
+
+      <div class="d-flex flex-column justify-content-between align-items-end">
+        <span class="green">Обсуждение старта пилота</span>
+        <div class="flex-column">
+          <button pButton type="button" style="background-color: #009A96">
+            Сотрудничать
+          </button>
+          <div class="d-flex justify-content-around">
+            <button pButton pRipple type="button"
+                    class="p-button-rounded p-button-secondary p-button-text green outline-none">
+              <i class="fas fa-share-alt"></i></button>
+            <button pButton pRipple type="button" class="p-button-rounded p-button-secondary p-button-text outline-none"
+                    (click)="onClickFavorites()">
+              <i *ngIf="project.isFavorite" class="fas fa-star green"></i>
+              <i *ngIf="!project.isFavorite" class="far fa-star green"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="d-flex flex-column mb-4">
+      <div class="green mb-2">О решении</div>
+      <div>{{project.shortDescription}}</div>
+    </div>
+
+    <div class="d-flex flex-column col-8 p-0 mb-4">
+      <div class="green mb-2">Контактные данные</div>
+      <div class="d-flex">
+        <div class="col-6">Организация транспортного комплекса:</div>
+        <div class="col-6">{{project.transportComplexOrganization}}</div>
+      </div>
+      <hr/>
+      <div class="d-flex">
+        <div class="col-6">Координатор от организации транспортного комплекса:</div>
+        <div class="col-6">{{project.transportComplexCoordinator}}</div>
+      </div>
+      <hr/>
+      <div class="d-flex">
+        <div class="col-6">Участник программы пилотирования “Транспортные инновации Москвы”:</div>
+        <div class="col-6">{{project.pilotCoordinator}}</div>
+      </div>
+      <hr/>
+      <div class="d-flex">
+        <div class="col-6">Координатор от участника программы пилотирования “Транспортные инновации Москвы”:</div>
+        <div class="col-6">{{project.pilotMember}}</div>
+      </div>
+      <hr/>
+    </div>
 
 
+    <!-- Эфекты -->
+    <div class="d-flex flex-column effects overflow-x-auto" *ngIf="project.effects?.length">
+      <div class="green mb-2">Ожидаемые эффекты</div>
+
+      <p-card *ngFor="let eff of project.effects" styleClass="w-100 mb-4">
+        <div class="d-flex align-items-center">
+
+          <i class="fas fa-check green mr-4" style="font-size: 1.5rem;"></i>
+          <span>{{eff.name}}</span>
+        </div>
+      </p-card>
+      <!--        <div *ngFor="let eff of project.effects">{{eff.name}}</div>-->
+    </div>
+
+
+    <!--    История проекта  -->
+    <div class="stages">
+      <div class="green mb-2">История проекта</div>
+      <div class="max-w-100 overflow-x-auto">
+        <p-timeline [value]="project.stage" layout="horizontal" align="top">
+          <ng-template pTemplate="content" let-stage>
+            <div>{{stage.date}}</div>
+            <div>{{stage.name}}</div>
+          </ng-template>
+        </p-timeline>
+      </div>
+    </div>
+
+    <!--  Доступные материалы  -->
+    <div class="d-flex flex-column">
+      <div class="green mb-2">Доступные материалы</div>
+      <div>
+
+        <p-button *ngFor="let file of project.material" icon="pi pi-download" [label]="file.name"
+                  styleClass="p-button-link outline-none" (click)="onClickFile(file)"></p-button>
+      </div>
+    </div>
   </div>
 </div>
+<hr/>
+
+
+<div class="col-10 mx-auto">
+  <div class="col-12" *ngIf="similarProjects && similarProjects.length">
+    <div class="green mb-4">Может быть интересно</div>
+
+    <p-carousel [value]="similarProjects" [numVisible]="3" [numScroll]="1" [circular]="false"
+                [responsiveOptions]="responsiveOptions" [showIndicators]="false">
+      <ng-template let-proj pTemplate="item">
+        <div class="cards_item">
+          <a href="project/{{proj.guid}}" class="card">
+            <div class="card_content">
+              <hr/>
+              <h5 class="card_title">{{proj.name}}</h5>
+              <p class="card_status green">{{proj.order.stage}}</p>
+              <p class="card_text overflow-hidden" style="max-height: 100px;">{{proj.shortDescription}}</p>
+            </div>
+          </a>
+        </div>
+      </ng-template>
+    </p-carousel>
+  </div>
+  <div class="col-12" *ngIf="linksPhoto && linksPhoto.length">
+    <div class="green my-4">Ищут похожие решения</div>
+
+    <p-carousel [value]="linksPhoto" [numVisible]="3" [numScroll]="1" [circular]="false"
+                [responsiveOptions]="responsiveOptions" [showIndicators]="false">
+      <ng-template let-link pTemplate="item">
+        <div class="img-item d-flex align-items-center justify-content-center">
+          <div class="img-item-content">
+            <div class="p-mb-3">
+              <img src="{{link}}" class="img-image"/>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </p-carousel>
+  </div>
+</div>
+
+
+

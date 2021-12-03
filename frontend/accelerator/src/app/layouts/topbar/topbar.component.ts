@@ -54,7 +54,8 @@ export class TopbarComponent implements OnInit {
    * @param event
    */
   onClickSearch(event: MouseEvent) {
-    WrapperComponent.notImplemented(this.messageService);
+    window.location.href = '/';
+    // WrapperComponent.notImplemented(this.messageService);
   }
 
   /**

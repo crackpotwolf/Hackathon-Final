@@ -29,7 +29,14 @@
   <ng-template let-project pTemplate="gridItem">
 
     <div class="cards_item">
-      <a href="project/{{project.guid}}" class="card">
+      <a href="project/{{project.guid}}" class="card position-relative">
+
+        <button pButton pRipple type="button"
+                class="p-button-rounded p-button-secondary p-button-text outline-none absolute-top-right p-0">
+          <i *ngIf="project.isFavorite" class="fas fa-star green"></i>
+          <i *ngIf="!project.isFavorite" class="far fa-star green"></i>
+        </button>
+
         <div class="card_content">
           <hr/>
           <h2 class="card_title">{{project.name}}</h2>
