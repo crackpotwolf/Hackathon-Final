@@ -9,7 +9,7 @@ if __name__=="__main__":
   data_loader = DataLoader()
   data_loader.__load__()
   #
-  applications_number = 30
+  applications_number = 1
   #
   applications_former = ApplicationsFormer()
   applications_former.__form__(applications_number=applications_number, data_loader=data_loader)

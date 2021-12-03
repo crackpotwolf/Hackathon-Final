@@ -1,4 +1,5 @@
 from forming.ApplicationsFormer import ApplicationsFormer
+from forming.ProductPassportDocxFormer import ProductPassportDocxFormer
 from generating.ProductPassportGenerator import ProductPassportGenerator
 from generating.TransportComplexCoordinatorsGenerator import TransportComplexCoordinatorsGenerator
 from loading.DataLoader import DataLoader
@@ -21,7 +22,7 @@ class ProductsPassportFormer:
     transport_complex_coordinators = TransportComplexCoordinatorsGenerator()
     transport_complex_coordinators.__generate_fullnames__(data_loader=data_loader)
 
-    for num_application in range(len(applications_former.applications_data)):
+    for num_application in range(0, len(applications_former.applications_data)):
       current_application = applications_former.applications_data[num_application]
       #
       product_passport_generator = ProductPassportGenerator()
@@ -31,3 +32,9 @@ class ProductsPassportFormer:
         transport_complex_coordinators=transport_complex_coordinators.fullnames
       )
       self.products_passport_data.append(product_passport_generator.product_passport_data)
+      #
+      product_passport_docx_former = ProductPassportDocxFormer()
+      product_passport_docx_former.__form_document__(
+       product_passport_generator_num=num_application,
+       product_passport_generator=product_passport_generator
+      )

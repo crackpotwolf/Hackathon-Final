@@ -15,7 +15,7 @@ class CompanyGenerator:
     self.people = ""
     self.website = ""
 
-  def __generate__(self, adjectives, nouns):
+  def __generate__(self, adjectives, nouns, people_count):
     
     def generate_name(adjectives, nouns, current_random: random.SystemRandom):
       fl_found_noun = False
@@ -35,8 +35,8 @@ class CompanyGenerator:
       
       return "%s %s" % (adjective.upper(), noun.upper())
 
-    def random_people(current_random: random.SystemRandom):
-      return current_random.randint(4, 1000)
+    def random_people(people_count, current_random: random.SystemRandom):
+      return current_random.choice(people_count)
     
     def generate_inn(current_random: random.SystemRandom):
       part_1 = current_random.randint(10, 99)
@@ -58,5 +58,5 @@ class CompanyGenerator:
     #
     self.name = generate_name(adjectives=adjectives, nouns=nouns, current_random=current_random)
     self.website = generate_website(name=self.name, current_random=current_random)
-    self.people = random_people(current_random=current_random)
+    self.people = random_people(people_count=people_count, current_random=current_random)
     self.inn = generate_inn(current_random=current_random)

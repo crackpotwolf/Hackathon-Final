@@ -24,6 +24,8 @@ class DataLoader:
     
     self.roles = []
     
+    self.people_company_number = []
+    
     self.product_stages = []
     self.pilot_product = []
     self.product_cases = []
@@ -36,10 +38,6 @@ class DataLoader:
     self.technologies = []
   
   def __load__(self):
-    
-    def get_file_by_url(url):
-      #
-      r = requests.get(url=url)
     
     def get_data_by_url(main_url: str, data_type: str, result_type: str) -> List:
       '''
@@ -316,6 +314,14 @@ class DataLoader:
       )
       if len(self.interest_transport_organization) == []:
         print("There is no data about {0}", "interest transport organization")
+        
+    def get_people_company_number():
+      self.people_company_number = read_from_json_in_dir(
+          filename="people_company_count.json",
+          dir="input_data"
+      )
+      if len(self.people_company_number) == []:
+        print("There is no data about {0}", "people company number")
     #
     get_fullnames()
     #
@@ -342,6 +348,8 @@ class DataLoader:
     get_certification()
     #
     get_interest_transport_organization()
+    #
+    get_people_company_number()
     #
     # get_technologies()
 

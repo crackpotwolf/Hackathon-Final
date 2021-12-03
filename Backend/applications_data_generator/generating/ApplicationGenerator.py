@@ -53,7 +53,8 @@ class ApplicationGenerator:
     companyGenerator = CompanyGenerator()
     companyGenerator.__generate__(
       adjectives=data_loader.adjectives,
-      nouns=data_loader.nouns
+      nouns=data_loader.nouns,
+      people_count=data_loader.people_company_number
     )
     
     # generate Project-obj
