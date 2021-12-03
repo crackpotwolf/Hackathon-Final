@@ -99,7 +99,7 @@ namespace Search.Controllers.API.v1
 
                 Dictionary<Guid, float> results = new Dictionary<Guid, float>();
 
-                foreach (var item in result.Hits)
+                foreach (var item in result.Hits.Where(p=>p.Score>=0.7))
                 {
                     results.Add(item.Guid, item.Score);
 
