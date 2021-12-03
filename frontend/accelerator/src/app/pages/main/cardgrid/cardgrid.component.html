@@ -1,39 +1,37 @@
-<div class="card">
-  <p-dataView #dv [value]="projects" [paginator]="true" [rows]="9" filterBy="name"
-              [sortField]="sortField" [sortOrder]="sortOrder" layout="grid">
+<p-dataView #dv [value]="projects" [paginator]="true" [rows]="12" filterBy="name"
+            [sortField]="sortField" [sortOrder]="sortOrder" layout="grid">
 
-    <ng-template pTemplate="header">
-      <div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between">
-        <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
-      </div>
-    </ng-template>
+  <ng-template pTemplate="header">
+    <div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between">
+      <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+    </div>
+  </ng-template>
 
-    <ng-template let-project pTemplate="listItem">
+  <ng-template let-project pTemplate="listItem">
 
-      <div class="p-col-12">
-        <div class="product-list-item">
-          <div class="product-list-detail">
-            <div class="product-name">{{project.name}}</div>
-            <div class="product-description">{{project.shortDescription}}</div>
-          </div>
-          <div class="product-list-action">
-          </div>
+    <div class="p-col-12">
+      <div class="product-list-item">
+        <div class="product-list-detail">
+          <div class="product-name">{{project.name}}</div>
+        </div>
+        <div class="product-list-action">
         </div>
       </div>
+    </div>
 
-    </ng-template>
-    <ng-template let-project pTemplate="gridItem">
+  </ng-template>
+  <ng-template let-project pTemplate="gridItem">
 
-      <div class="p-col-12 p-md-4">
-        <div class="product-grid-item card">
-          <div class="product-grid-item-content">
-            <div class="product-name">{{project.name}}</div>
-            <div class="product-description">{{project.shortDescription}}</div>
-          </div>
+    <li class="cards_item">
+      <div class="card">
+        <div class="card_content">
+          <hr/>
+          <h2 class="card_title">{{project.name}}</h2>
+          <p class="card_status">Статус</p>
+          <p class="card_text">{{project.shortDescription}}</p>
         </div>
       </div>
+    </li>
 
-    </ng-template>
-
-  </p-dataView>
-</div>
+  </ng-template>
+</p-dataView>

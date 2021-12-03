@@ -9,7 +9,7 @@ import {ProjectServiceEventType} from "../../../services/data/ProjectServiceEven
 @Component({
   selector: 'app-cardgrid',
   templateUrl: './cardgrid.component.html',
-  styleUrls: ['./cardgrid.component.sass']
+  styleUrls: ['./cardgrid.component.css']
 })
 export class CardgridComponent implements OnInit {
 
