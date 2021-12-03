@@ -5,3 +5,7 @@ location /api/accelerator/swagger {
 location /api/accelerator/ {
   proxy_pass http://accelerator;
 }
+
+location /photos/ {
+  proxy_pass http://accelerator;
+}

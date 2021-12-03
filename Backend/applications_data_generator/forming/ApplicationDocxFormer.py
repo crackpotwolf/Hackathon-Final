@@ -27,7 +27,7 @@ class ApplicationDocxFormer:
     prgrph_7 = document.add_paragraph("7. Запрос к акселератору и видение пилотного проекта: %s" % (application_generator.request_to_accelerate))
     prgrph_8 = document.add_paragraph("8. Требуется ли сертификация продукта: %s" % (application_generator.certification))
     prgrph_9 = document.add_paragraph("9. ФИО контактного лица по заявке: %s" % (application_generator.fullname_applicant))
-    prgrph_0 = document.add_paragraph("10. Должность контактного лица: %s" % (application_generator.role_applicant))
+    prgrph_10 = document.add_paragraph("10. Должность контактного лица: %s" % (application_generator.role_applicant))
     prgrph_11 = document.add_paragraph("11. Контактный телефон: %s" % (application_generator.phone_applicant))
     prgrph_12 = document.add_paragraph("12. Контактная почта: %s" % (application_generator.email_applicant))
     prgrph_13 = document.add_paragraph("13. Наименование юридического лица: %s" % (application_generator.name_company))

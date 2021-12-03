@@ -640,7 +640,7 @@ namespace Accelerator.Controllers.API.v1.Files
         /// Получить путь к папке с фотками
         /// </summary>
         /// <returns></returns>
-        protected string GetPathUserPhotos()
+        protected string GetPathProjectPhotos()
         {
             try
             {

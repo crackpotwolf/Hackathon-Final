@@ -5,15 +5,20 @@ using Hangfire;
 using Hangfire.Dashboard;
 using Hangfire.PostgreSql;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using Microsoft.Extensions.FileProviders;
+using Microsoft.Extensions.Options;
 using System.Reflection;
 
 namespace Accelerator
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        private IWebHostEnvironment CurrentEnvironment { get; set; }
+
+        public Startup(IWebHostEnvironment env, IConfiguration configuration)
         {
             Configuration = configuration;
+            CurrentEnvironment = env;
         }
 
         public IConfiguration Configuration { get; }
@@ -21,6 +26,8 @@ namespace Accelerator
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            string env = CurrentEnvironment.EnvironmentName;
+
             #region Базовая инициализация DI
 
             services.AddBaseModuleDI(Configuration.GetConnectionString("DefaultConnection"));
@@ -62,10 +69,13 @@ namespace Accelerator
                 }));
 
             // Add the processing server as IHostedService
-            services.AddHangfireServer(options =>
+            if (env != "Development")
             {
-                options.WorkerCount = 5;
-            });
+                services.AddHangfireServer(options =>
+                {
+                    options.WorkerCount = 5;
+                });
+            }
 
             #endregion
         }
@@ -74,8 +84,24 @@ namespace Accelerator
         public void Configure(IApplicationBuilder app,
             IApiVersionDescriptionProvider provider,
             IWebHostEnvironment env,
+            IOptions<PathConfig> pathConfig,
             InitDB InitDB)
         {
+            if (env.EnvironmentName != "Development")
+            {
+                // Если папки нету
+                if (!Directory.Exists(pathConfig.Value.UserPhotos))
+                {
+                    DirectoryInfo di = Directory.CreateDirectory(pathConfig.Value.UserPhotos);
+                }
+
+                app.UseStaticFiles(new StaticFileOptions
+                {
+                    FileProvider = new PhysicalFileProvider(pathConfig.Value.UserPhotos),
+                    RequestPath = "/photos"
+                });
+            }
+
             app.UseBaseServices(env, provider);
 
             app.UseHangfireDashboard("/hangfire", new DashboardOptions()

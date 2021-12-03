@@ -18,4 +18,4 @@ class TransportComplexCoordinatorsGenerator:
       lastname = current_random.choice(data_loader.lastnames[gender])
       patronymic = current_random.choice(data_loader.patronymics[gender])
       #
-      self.fullnames.append("%s %s %s" % (name, lastname, patronymic))
+      self.fullnames.append(("%s %s %s" % (name, lastname, patronymic)).replace("\t", ""))

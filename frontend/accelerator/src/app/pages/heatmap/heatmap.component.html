@@ -1,0 +1,38 @@
+<div class="row">
+
+  <div class="col-xl-3">
+
+    <div class="card shadow mb-5">
+      <div class="card-header card-header py-3 d-flex flex-row align-items-center"><label>Выбор графика движения</label></div>
+      <div class="card-body container-fullcalendar">
+        <div class="item form-group">
+          <h5>Выберете технологическое направление:</h5>
+          <p-dropdown [styleClass]="'w-100'" [options]="tDirections" [(ngModel)]="selectedTDirection" (onChange)="initMap(selectedTDirection)"></p-dropdown>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="col-xl-9">
+    <div class="card shadow mb-4 maprows">
+      <div class="card-header card-header py-3 d-flex flex-row align-items-center"><label>Тепловая карта</label></div>
+      <div class="">
+        <div class="row-fluid">
+          <div id="YMapsID" class="maprow"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<p-card header="Advanced Card" subheader="Card Subheader" [style]="{width: '100%'}" styleClass="p-card-shadow">
+
+  <p-button label="Save" icon="pi pi-check"></p-button>
+  <p-button label="Cancel" icon="pi pi-times" styleClass="p-button-secondary" [style]="{'margin-left': '.5em'}"></p-button>
+
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt
+    quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!</p>
+
+</p-card>

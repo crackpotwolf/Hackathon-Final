@@ -300,6 +300,7 @@ class DataLoader:
         print("There is no data about {0}", "source info accelerator")
         
     def get_certification():
+      # [ // "да, требуется сертификация и у нас она есть", // "да, требуется сертификация, но  у нас ее нет", //"нет, не требуется"]
       self.certification = read_from_json_in_dir(
           filename="certification.json",
           dir="input_data"

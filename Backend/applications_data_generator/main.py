@@ -9,7 +9,7 @@ if __name__=="__main__":
   data_loader = DataLoader()
   data_loader.__load__()
   #
-  applications_number = 1
+  applications_number = 30
   #
   applications_former = ApplicationsFormer()
   applications_former.__form__(applications_number=applications_number, data_loader=data_loader)
@@ -18,7 +18,7 @@ if __name__=="__main__":
   products_passport_former.__form__(applications_former=applications_former, data_loader=data_loader)
   #
   write_to_json_in_dir(
-   filename="projects.json",
-   data=products_passport_former.products_passport_data,
-   dir="middle_data"
+    filename="projects.json",
+    data=products_passport_former.products_passport_data,
+    dir="middle_data"
   )

@@ -59,8 +59,10 @@ import {DynamicFormControlService} from "../components/dynamic-forms/dynamic-for
 import {DataViewModule} from "primeng/dataview";
 import {ButtonModule} from 'primeng/button';
 import {RequestForInnovationComponent} from './request-for-innovation/request-for-innovation.component';
-import { ProjectComponent } from './project/project.component';
-import { SearchComponent } from './main/search/search.component';
+import {ProjectComponent} from './project/project.component';
+import {SearchComponent} from './main/search/search.component';
+import {HeatmapComponent} from './heatmap/heatmap.component';
+import {AutoCompleteModule} from "primeng/autocomplete";
 import {CardModule} from "primeng/card";
 import {TimelineModule} from "primeng/timeline";
 import {CarouselModule} from "primeng/carousel";
@@ -86,61 +88,64 @@ const DragConfig = {
       DynamicFormComponent,
       RequestForInnovationComponent,
       ProjectComponent,
-      SearchComponent
+      SearchComponent,
+      HeatmapComponent
     ],
-    imports: [
-        CommonModule,
-        // LayoutsModule,
+  imports: [
+    CommonModule,
+    // LayoutsModule,
 
-        // NG Material Modules
-        MatSidenavModule,
-        MatIconModule,
-        MatListModule,
-        MatToolbarModule,
-        DemoMaterialModule,
-        TableModule,
-        SliderModule,
-        MultiSelectModule,
-        FormsModule,
-        InputTextModule,
-        CalendarModule,
-        SidebarModule,
-        DropdownModule,
-        ReactiveFormsModule,
-        TooltipModule,
-        ChipsModule,
-        RippleModule,
-        ToolbarModule,
-        DialogModule,
-        ConfirmPopupModule,
-        InputMaskModule,
-        // NgxMatTimepickerModule,
-        // NgxMatDatetimePickerModule
-        NgxMaskModule.forRoot(),
-        InputTextareaModule,
-        FileUploadModule,
-        ToastModule,
-        KnobModule,
-        NgCircleProgressModule.forRoot({
-            "startFromZero": false,
-        }),
-        ProgressSpinnerModule,
-        BlockUIModule,
-        TagModule,
-        ChipModule,
-        CheckboxModule,
-        ToggleButtonModule,
-        SplitButtonModule,
-        OverlayPanelModule,
-        GalleriaModule,
-        SkeletonModule,
-        DividerModule,
-        PagesRoutingModule,
-        DataViewModule,
-        CardModule,
-        TimelineModule,
-        CarouselModule,
-    ],
+    // NG Material Modules
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule,
+    MatToolbarModule,
+    DemoMaterialModule,
+    TableModule,
+    SliderModule,
+    MultiSelectModule,
+    FormsModule,
+    InputTextModule,
+    CalendarModule,
+    SidebarModule,
+    DropdownModule,
+    ReactiveFormsModule,
+    TooltipModule,
+    ChipsModule,
+    RippleModule,
+    ToolbarModule,
+    DialogModule,
+    ConfirmPopupModule,
+    InputMaskModule,
+    // NgxMatTimepickerModule,
+    // NgxMatDatetimePickerModule
+    NgxMaskModule.forRoot(),
+    InputTextareaModule,
+    FileUploadModule,
+    ToastModule,
+    KnobModule,
+    NgCircleProgressModule.forRoot({
+      "startFromZero": false,
+    }),
+    ProgressSpinnerModule,
+    BlockUIModule,
+    TagModule,
+    ChipModule,
+    CheckboxModule,
+    ToggleButtonModule,
+    SplitButtonModule,
+    OverlayPanelModule,
+    GalleriaModule,
+    SkeletonModule,
+    DividerModule,
+    PagesRoutingModule,
+    DataViewModule,
+    CardModule,
+    TimelineModule,
+    CarouselModule,
+    AutoCompleteModule,
+    CardModule,
+  ],
   exports: [
     RequestForInnovationComponent,
   ],
