@@ -110,6 +110,7 @@ export class FilterComponent implements OnInit {
       name: name,
       key: fieldKey,
       type: TypeFilter.checkbox,
+      color: "#009A96",
       values: values
     });
   }
