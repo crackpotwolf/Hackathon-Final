@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Scaffolding.Metadata;
 using Microsoft.Extensions.Options;
+using MoreLinq;
 using Search_Data.Search;
 using Swashbuckle.AspNetCore.Annotations;
 using System.ComponentModel;
@@ -124,6 +125,29 @@ namespace Accelerator.Controllers.API.v1.Projects
         [HttpGet("teams")]
         public async Task<IActionResult> GetTeams(Guid projectGuid) => Ok(_db.Teams.Where(p => p.ProjectGuid == projectGuid));
 
+
+        [HttpGet("get-similar")]
+        public IActionResult GetSimilarProjects(Guid guid)
+        {
+            try
+            {
+                var search = new WordSearch(_pathConfig.DocumentsIndexes);
+
+                var project = _projectsRepository.GetListQuery().FirstOrDefault(p=>p.Guid==guid);
+                var result = search.Search($"{project.Name}, {project.ShortDescription}");
+                var results = _projectsRepository.GetListQuery().Where(p => result.Hits.ToList().Select(t => t.Guid).Contains(p.Guid))
+                    .Include(p => p.Order)
+                    .Skip(1)
+                    .Take(4)
+                    .ToList();
+
+                return Ok(results);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex);
+            }
+        }
 
         [HttpGet("all")]
         [SwaggerResponse(500, "Неизвестная ошибка")]
