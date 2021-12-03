@@ -5,14 +5,14 @@
   font-weight: bold
 
 $green: #009A96
+$background: #F6F7FA
 
 *
   font-family: 'test'
 
-
 body
   font-size: 1rem
-
+  background: $background
 
 .bold
   font-weight: bold
@@ -52,7 +52,6 @@ textarea
   //background-position: right calc(0.375em + 0.235rem) center
   //background-size: calc(0.75em + 0.47rem) calc(0.75em + 0.47rem)
   color: #ff3d60
-
 
 hr
   color: $green
@@ -101,3 +100,116 @@ hr
 
 .green
   color: $green !important
+
+.effects .p-card .p-card-content
+  padding: 0
+
+.stages .p-timeline-event-opposite, .p-timeline-event-content
+  flex: 0 !important
+
+.outline-none:focus, .outline-none:hover
+  outline: 0 none !important
+  outline-offset: 0 !important
+  box-shadow: none !important
+
+.p-dataview .p-dataview-content, .p-paginator
+  background: $background
+
+.p-dataview .p-paginator-bottom
+  border-width: 0
+
+.p-timeline-event-content
+  margin: 0 1rem
+
+.img-item
+
+  &-content
+  //border: 1px solid var(--surface-d)
+    border-radius: 3px
+    margin: .3rem
+    text-align: center
+    padding: 2rem 0
+    height: 100%
+
+  .img-image
+    width: 90%
+//box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)
+
+.cards_item
+  display: flex
+  padding: 1rem
+
+.cards_list
+  display: flex
+  padding: 1rem
+  border: #000000 !important
+
+.card
+  border-radius: 0.25rem
+  box-shadow: 0 10px 40px -14px rgba(0, 0, 0, 0.15)
+  display: flex
+  flex-direction: column
+  overflow: hidden
+  border-style: solid
+  border-color: rgba(0, 0, 0, 0.3)
+  position: relative
+  text-decoration: none
+
+  &_content
+    padding: 1rem
+
+    &_title
+      color: #000000
+      font-size: 1.1rem
+      font-weight: 700
+      letter-spacing: 1px
+      text-transform: capitalize
+      margin: 0px
+
+    &_text
+      color: #000000
+      font-size: 0.875rem
+      line-height: 1.5
+      margin-bottom: 1.25rem
+      font-weight: 400
+      overflow: hidden
+      display: -webkit-box
+      -webkit-line-clamp: 3
+      -webkit-box-orient: vertical
+      line-height: 1.3em
+      height: 3.9em
+      margin-top: 35px
+
+    &_status
+      margin-top: 15px
+      color: #000000
+
+    hr
+      color: #009A96
+      height: 5px
+
+    .relevance
+      color: #000000
+      position: absolute
+      bottom: 5px
+      right: 8px
+
+    &:hover
+      background-color: #009A96
+      transform: scale(1.02)
+
+      .card_text, .card_title, .card_status, .relevance, h2, hr
+        color: #ffffff !important
+
+.card_title, .card_text
+  color: #000
+
+.p-timeline .p-timeline-event-marker,
+.p-timeline .p-timeline-event-connector
+  border: 2px solid $green
+
+
+.absolute-top-right
+  position: absolute
+  top: 2px
+  right: 2px

@@ -34,4 +34,10 @@ export enum ProjectServiceEventType {
    * Сброс фильтро
    */
   ClearFilters,
+
+  /**
+   * Добавление/исключение из избранного
+   */
+  onClickFavorites,
+
 }

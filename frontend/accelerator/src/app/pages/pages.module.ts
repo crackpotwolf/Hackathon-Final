@@ -59,11 +59,13 @@ import {DynamicFormControlService} from "../components/dynamic-forms/dynamic-for
 import {DataViewModule} from "primeng/dataview";
 import {ButtonModule} from 'primeng/button';
 import {RequestForInnovationComponent} from './request-for-innovation/request-for-innovation.component';
-import { ProjectComponent } from './project/project.component';
-import { SearchComponent } from './main/search/search.component';
-import { HeatmapComponent } from './heatmap/heatmap.component';
+import {ProjectComponent} from './project/project.component';
+import {SearchComponent} from './main/search/search.component';
+import {HeatmapComponent} from './heatmap/heatmap.component';
 import {AutoCompleteModule} from "primeng/autocomplete";
 import {CardModule} from "primeng/card";
+import {TimelineModule} from "primeng/timeline";
+import {CarouselModule} from "primeng/carousel";
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -138,6 +140,9 @@ const DragConfig = {
     DividerModule,
     PagesRoutingModule,
     DataViewModule,
+    CardModule,
+    TimelineModule,
+    CarouselModule,
     AutoCompleteModule,
     CardModule,
   ],

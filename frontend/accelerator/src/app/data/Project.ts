@@ -27,6 +27,7 @@ export interface Project {
   shortDescription: string;
   // Сроки реализации проекта
   timing: string;
+  timingMonths: any;
   // КОНТЕКСТ И ПОТРЕБНОСТИ
   context: string;
   // Имя пути
@@ -39,18 +40,22 @@ export interface Project {
   // Релевантность
   relevance: number;
 
+  isFavorite: boolean;
+
+  //Полный бюджет
+  totalBudget: number | string;
 
   // region Сущности
 
   order: Order;
-  effects: Effects;
-  stage: Stage;
-  team: Team;
-  budget: Budget;
-  status: Status;
-  activities: Activities;
-  meeting: Meeting;
-  material: Material;
+  effects: Effects[];
+  stage: Stage[];
+  team: Team[];
+  budget: Budget[];
+  status: Status[];
+  activities: Activities[];
+  meeting: Meeting[];
+  material: Material[];
   // endregion
 
 }

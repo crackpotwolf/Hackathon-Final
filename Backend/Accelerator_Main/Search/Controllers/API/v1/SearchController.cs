@@ -147,7 +147,9 @@ namespace Search.Controllers.API.v1
                 // Результаты
                 _logger.LogInformation($"Запрос: '{result.Query}' всего: {result.TotalHits}. {inputText}");
 
-                var results = _projectRepository.GetListQuery().Where(p => result.Hits.Select(t => t.Guid).Contains(p.Guid))
+                var guids = result.Hits.Where(p => p.Score >= 0.7).Select(p=>p.Guid).ToList();
+
+                var results = _projectRepository.GetListQuery().Where(p => guids.Contains(p.Guid))
                     .Include(p => p.Order)
                     .ToList();
 
