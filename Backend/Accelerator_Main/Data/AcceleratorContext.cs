@@ -58,6 +58,10 @@ namespace Data
 
         public DbSet<InnovationRequest> InnovationRequests { get; set; }
 
+        public DbSet<Company> Companies { get; set; }
+
+        public DbSet<Recomendation> Recomendations { get; set; }
+
         #endregion
 
         #region Files
