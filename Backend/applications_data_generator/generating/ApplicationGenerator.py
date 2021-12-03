@@ -62,7 +62,7 @@ class ApplicationGenerator:
     productGenerator.__generate__(data_loader=data_loader)
     
     # Applicant generated data 
-    self.fullname_participant = "%s %s %s" % (applicantGenerator.lastname, applicantGenerator.name, applicantGenerator.patronymic)
+    self.fullname_applicant = ("%s %s %s" % (applicantGenerator.lastname, applicantGenerator.name, applicantGenerator.patronymic)).replace("\t", "")
     self.role_applicant = applicantGenerator.role
     self.phone_applicant = applicantGenerator.phone
     self.email_applicant = applicantGenerator.email

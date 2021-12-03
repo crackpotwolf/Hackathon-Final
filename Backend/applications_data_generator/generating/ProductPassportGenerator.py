@@ -111,7 +111,7 @@ class ProductPassportGenerator:
         participant = ApplicantGenerator()
         participant.__generate__(names=data_loader.names, lastnames=data_loader.lastnames, patronymics=data_loader.patronymics, roles=data_loader.roles)
         self.teams.append({
-          "fio": "%s %s %s" % (participant.lastname, participant.name, participant.patronymic),
+          "fio": ("%s %s %s" % (participant.lastname, participant.name, participant.patronymic)).replace("\t", ""),
           "position": "%s/%s" % (participant.role, application.name_company),
           "contacts": "phone: %s, e-mail: %s" % (participant.phone, participant.email)
         })
@@ -235,7 +235,7 @@ class ProductPassportGenerator:
     generate_team(data_loader=data_loader, count_participants=current_random.randint(4, 12), current_random=current_random)
     self.name = generate_name(adjectives=data_loader.adjectives, nouns=data_loader.nouns, current_random=current_random)
     self.transportComplexOrganization = application.interest_transport_organization
-    self.pilotMember = current_random.choice(["да", "нет"])
+    self.pilotMember = current_random.choice(transport_complex_coordinators)
     self.leader = current_random.choice(self.teams)["fio"]
     self.pilotCoordinator = application.fullname_applicant
     self.transportComplexCoordinator = current_random.choice(transport_complex_coordinators)
