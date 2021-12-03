@@ -6,9 +6,9 @@ import {CheckboxField} from "../dynamic-forms/entities/checkbox";
 import {GroupCheckboxField} from "../dynamic-forms/entities/group-checkbox";
 import {RangeField} from "../dynamic-forms/entities/slider";
 import {HttpClient} from "@angular/common/http";
-import {ProjectsService} from "../../services/projects.service";
-import {ProjectServiceEventData} from "../../services/data/ProjectServiceEventData";
-import {ProjectServiceEventType} from "../../services/data/ProjectServiceEventType";
+import {ProjectsService} from "../../../services/projects/projects.service";
+import {ProjectServiceEventData} from "../../../services/projects/data/ProjectServiceEventData";
+import {ProjectServiceEventType} from "../../../services/projects/data/ProjectServiceEventType";
 import {Project} from "../../data/Project";
 import * as moment from "moment";
 

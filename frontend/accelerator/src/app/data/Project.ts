@@ -10,6 +10,7 @@ import {Meeting} from "./Meeting";
 import {Material} from "./Material";
 
 export interface Project {
+  guid: string;
   // Наименование проекта
   name: string;
   // Организация транспортного комплекса Москвы
@@ -30,6 +31,10 @@ export interface Project {
   context: string;
   // Имя пути
   pathName: string;
+
+
+  // Релевантность
+  relevance: number;
 
 
   // region Сущности

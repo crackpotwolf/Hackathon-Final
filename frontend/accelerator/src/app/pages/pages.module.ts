@@ -60,6 +60,7 @@ import {DataViewModule} from "primeng/dataview";
 import {ButtonModule} from 'primeng/button';
 import {RequestForInnovationComponent} from './request-for-innovation/request-for-innovation.component';
 import { ProjectComponent } from './project/project.component';
+import { SearchComponent } from './main/search/search.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -81,7 +82,8 @@ const DragConfig = {
       DynamicFormFieldComponent,
       DynamicFormComponent,
       RequestForInnovationComponent,
-      ProjectComponent
+      ProjectComponent,
+      SearchComponent
     ],
   imports: [
     CommonModule,

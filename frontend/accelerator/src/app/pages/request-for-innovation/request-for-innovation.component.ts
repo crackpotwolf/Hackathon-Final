@@ -12,63 +12,57 @@ import {TextboxField} from "../../components/dynamic-forms/entities/textbox";
 export class RequestForInnovationComponent implements OnInit {
   formFields: FormFieldBase<any>[] = [
     new TextareaField({
-      label: 'Что болит?',
+      label: 'Опишите проблему',
       key: "1",
       placeholder: "",
-      subLabel: `Опишите своими словами существующую в организации проблему.
-      Можно сформулировать проблему в форму задачи`,
+      subLabel: `Что болит? Опишите своими словами, возможно, в форме задачи`,
       required: true,
       wide: true,
     }),
     new TextareaField({
-      label: 'Как проявляется ваша проблема?',
+      label: 'Как проявляется проблема?',
       key: "2",
       placeholder: "",
-      subLabel: 'Приведите описание реальной ситуации, в которой проблема бы проявилась',
+      subLabel: 'Приведите описание реальной проблемной ситуации',
       required: true,
       wide: true,
     }),
     new TextareaField({
-      label: 'Что будет если проблему не решать?',
+      label: 'Каковы последствия проблемы?',
       key: "3",
       placeholder: "",
-      subLabel: 'Опишите нежелательные эффекты, которые возникают или могут возникнуть из-за того, что проблема не решается',
+      subLabel: 'Опишите нежелательные последствия нерешенной проблемы',
       required: true,
       wide: true,
     }),
     new TextareaField({
-      label: 'Почему так происходит?',
+      label: 'Почему возникла проблема?',
       key: "4",
       placeholder: "",
-      subLabel: `Какие на ваш взгляд ключевые причины возникновения проблемы?
-       Что на ваш взгляд является причиной возникновения проблемы?`,
+      subLabel: `Опишите ключевые причины возникновения проблемы`,
       required: true,
       wide: true,
     }),
     new TextareaField({
-      label: 'У кого болит?',
+      label: 'Кого затрагивает проблема?',
       key: "5",
       placeholder: "",
-      subLabel: 'Кто является непосредственно ответственным за проблемный участок?',
+      subLabel: 'У кого болит? Кто отвечает за проблемный участок',
       required: true,
       wide: true,
     }),
     new TextareaField({
-      label: 'Какой желательный срок решения проблемы?',
+      label: 'Когда желательно решить проблему?',
       key: "6",
       placeholder: "",
       required: true,
       wide: true,
     }),
     new TextareaField({
-      label: 'Пробовали решать?',
+      label: 'Как пытались решить проблему?',
       key: "7",
       placeholder: "",
-      subLabel: `Как пытались решить проблему ранее?
-      Почему эти попытки оказались неудачными или почему были признаны неудачными?
-      Чем не устроили найденные решения?
-      Общались ли с рынком?
-      Если да, то с кем?`,
+      subLabel: `Опишите предпринятые попытки решения и причины их неудачи`,
       required: true,
       wide: true,
     }),
@@ -76,23 +70,23 @@ export class RequestForInnovationComponent implements OnInit {
       label: 'Как с вами связаться?',
       key: "8",
       placeholder: "",
-      subLabel: 'Укажите наименование вашего предприятия, ваши ФИО, и телефон для связи',
+      subLabel: 'Укажите наименование вашего предприятия, ваши ФИО, Email и телефон',
       required: true,
       wide: true,
     }),
-    new TextboxField({
-      label: 'Email',
-      required: true,
-      subLabel: `Контактные данные необходимы что бы мы могли прислать вам сообщение о проектах подходящих под вашу заявку`
-    }),
-    new TextboxField({
-      label: 'Фамилия',
-      required: true,
-    }),
-    new TextboxField({
-      label: 'Имя',
-      required: true,
-    }),
+    // new TextboxField({
+    //   label: 'Email',
+    //   required: true,
+    //   subLabel: `Контактные данные необходимы что бы мы могли прислать вам сообщение о проектах подходящих под вашу заявку`
+    // }),
+    // new TextboxField({
+    //   label: 'Фамилия',
+    //   required: true,
+    // }),
+    // new TextboxField({
+    //   label: 'Имя',
+    //   required: true,
+    // }),
   ];
   form?: FormGroup;
 

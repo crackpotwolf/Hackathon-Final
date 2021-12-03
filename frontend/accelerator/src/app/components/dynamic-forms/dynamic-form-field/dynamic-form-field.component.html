@@ -6,8 +6,11 @@
     <label *ngIf="field.required" [attr.for]="field.key" class="bold mb-1 ml-1" [ngClass]="{
           'is-invalid': !isValid
 }">*</label>
+
   </div>
 
+  <label *ngIf="field.subLabel" [attr.for]="field.key" class="mb-1 text-xs" [innerHTML]="field.subLabel"
+         style="color: #009A96;"></label>
 
   <!--  <div [ngSwitch]="field.controlType" [pTooltip]="getErrorMessage()" [tooltipDisabled]="!field.required"-->
   <!--       [tooltipPosition]="'bottom'">-->
@@ -88,7 +91,5 @@
     </div>
 
   </div>
-
-  <label *ngIf="field.subLabel" [attr.for]="field.key" class="mb-1 text-xs" [innerHTML]="field.subLabel"></label>
   <!--  <div class="errorMessage" *ngIf="!isValid">{{field.label}} is required</div>-->
 </div>

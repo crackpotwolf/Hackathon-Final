@@ -21,7 +21,7 @@ body {
   padding: 1rem;
 }
 
-.main{
+.main {
   max-width: 1200px;
   margin: 0 auto;
 }
@@ -70,15 +70,15 @@ img {
 }
 
 @media (min-width: 40rem) {
-.cards_item {
-  width: 50%;
-}
+  .cards_item {
+    width: 50%;
+  }
 }
 
 @media (min-width: 56rem) {
-.cards_item {
-  width: 33.3333%;
-}
+  .cards_item {
+    width: 33.3333%;
+  }
 }
 
 .card {
@@ -90,6 +90,7 @@ img {
   overflow: hidden;
   border-style: solid;
   border-color: #000000;
+  position: relative;
 }
 
 .card_content {
@@ -127,7 +128,7 @@ img {
   margin-top: 15px;
 }
 
-.made_by{
+.made_by {
   font-weight: 400;
   font-size: 13px;
   margin-top: 35px;
@@ -137,5 +138,11 @@ img {
 hr {
   color: #009A96;
   height: 5px;
+}
+
+.relevance {
+  position: absolute;
+  bottom: 5px;
+  right: 8px;
 }
 

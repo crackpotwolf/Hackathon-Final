@@ -1,9 +1,10 @@
-<p-dataView #dv [value]="projects" [paginator]="true" [rows]="12" filterBy="name"
+<p-dataView #dv [value]="getShowProjects()" [paginator]="true" [rows]="12" filterBy="name"
             [sortField]="sortField" [sortOrder]="sortOrder" layout="grid">
 
   <ng-template pTemplate="header">
-    <div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between">
-      <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+    <div class="d-flex justify-content-between align-items-end">
+      <label style="" class="text-xs">Всего {{projects.length}} компаний </label>
+      <p-dataViewLayoutOptions class="p-button-sm"></p-dataViewLayoutOptions>
     </div>
   </ng-template>
 
@@ -30,6 +31,8 @@
           <p class="card_status">Статус</p>
           <p class="card_text">{{project.shortDescription}}</p>
         </div>
+
+        <div *ngIf="project.relevance" class="relevance text-xs">{{project.relevance.toFixed(2)}}</div>
       </div>
     </li>
 
