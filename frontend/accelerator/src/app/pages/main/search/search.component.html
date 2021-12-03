@@ -1,10 +1,20 @@
 <div class="p-inputgroup">
   <span class="p-inputgroup-addon bg-white"><i class="pi pi-search"></i></span>
   <input type="text" pInputText placeholder="Опишите вашу проблему или предполагаемое решение"
-         style="border-right: 0;border-left: 0;" class="outline-none" (input)="onInputFilter($event)" [(ngModel)]="textGlobalSearch">
+         style="border-right: 0;border-left: 0;" class="outline-none" (input)="onInputFilter($event)"
+         [(ngModel)]="textGlobalSearch">
   <span class="p-inputgroup-addon bg-white">
     <button pButton pRipple type="button" icon="pi pi-filter" label="Фильтры"
             class="p-button-success p-button-text outline-none bg-white"
-            (click)="onClickOpenFilters($event)" style="color: #009A96;"></button>
+            (click)="isVisibleFilters=true;" style="color: #009A96;"></button>
   </span>
 </div>
+
+
+<p-sidebar [(visible)]="isVisibleFilters" position="right"
+           header="test"
+           [style]="{width:'calc(50% - 1rem)', 'z-index': 1102, minWidth: '470px'}"
+           [baseZIndex]="1101"
+           [autoZIndex]="false">
+  <app-filter></app-filter>
+</p-sidebar>

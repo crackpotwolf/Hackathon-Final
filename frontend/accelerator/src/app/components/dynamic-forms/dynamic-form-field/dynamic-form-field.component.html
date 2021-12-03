@@ -1,7 +1,7 @@
 <div [formGroup]="form">
-  <div class="d-flex">
+  <div class="d-flex" *ngIf="field.controlType != 'group-checkbox'">
     <label [attr.for]="field.key" class="bold mb-1">
-      {{field.label}}{{field.colon ? ':' : ''}} {{['slider'].indexOf(field.controlType) != -1 ? field.value : ''}}
+      {{field.label}}{{field.colon ? ':' : ''}} {{['slider'].indexOf(field.controlType) != -1 ? field.value ?? 0 : ''}}
     </label>
     <label *ngIf="field.required" [attr.for]="field.key" class="bold mb-1 ml-1" [ngClass]="{
           'is-invalid': !isValid
@@ -41,7 +41,8 @@
       <div class="input-group-append">
 
         <div class="input-group-append">
-          <button class="btn btn-primary" type="button" (click)="dp.open()"><i class="fas fa-calendar-day"></i></button>
+          <button class="btn btn-primary" type="button" (click)="dp.open()"><i class="fas fa-calendar-day"></i>
+          </button>
         </div>
       </div>
       <mat-datepicker #dp></mat-datepicker>
@@ -67,18 +68,32 @@
                     styleClass="w-100"></p-toggleButton>
 
     <!-- group checkbox -->
-    <section *ngSwitchCase="'group-checkbox'" [formGroup]="field.value">
-      <!--      <h5>{{field.label}}</h5>-->
-      <div class="p-field-checkbox" *ngFor="let opt of field.options">
-        <mat-checkbox [formControlName]="opt.key.toString()">{{opt.value}}</mat-checkbox>
-        <!--        <p-checkbox [formControlName]="opt.key" value="New York" [(ngModel)]="field.value" inputId="ny"></p-checkbox>-->
-        <!--        <label [for]="opt.key">{{opt.value}}</label>-->
-      </div>
-    </section>
+
+    <mat-expansion-panel *ngSwitchCase="'group-checkbox'">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <div class="d-flex">
+            <div *ngIf="countSelectedCheckbox()" class="label-change-filter">{{countSelectedCheckbox()}}</div>
+            <span>{{field.label}}</span>
+          </div>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <section [formGroup]="field.value">
+        <!--      <h5>{{field.label}}</h5>-->
+        <div class="p-field-checkbox" *ngFor="let opt of field.options">
+          <mat-checkbox [formControlName]="opt.key.toString()">{{opt.value}}</mat-checkbox>
+          <!--        <p-checkbox [formControlName]="opt.key" value="New York" [(ngModel)]="field.value" inputId="ny"></p-checkbox>-->
+          <!--        <label [for]="opt.key">{{opt.value}}</label>-->
+        </div>
+      </section>
+    </mat-expansion-panel>
 
     <!-- slider -->
     <div *ngSwitchCase="'slider'">
-
+      <div class="d-flex justify-content-between">
+        <span>{{field.min ?? 0}}</span>
+        <span>{{field.max}}</span>
+      </div>
       <mat-slider
         thumbLabel
         [thumbLabel]="true"

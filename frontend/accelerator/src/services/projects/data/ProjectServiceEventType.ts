@@ -15,4 +15,14 @@ export enum ProjectServiceEventType {
    * Глобальный поиск проектов завершился ошибкой
    */
   RunninSearchByGlobalError,
+
+  /**
+   * Получение текущих/отображаемых проектов
+   */
+  GetCurrentProjects,
+
+  /**
+   * Выгрузка текущих проектов
+   */
+  CurrentProjects
 }

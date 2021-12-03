@@ -59,4 +59,8 @@ export class DynamicFormFieldComponent implements OnInit {
     return messages.join('\n')
   }
 
+  countSelectedCheckbox() {
+    let values: any[] = Object.values(this.field.value.getRawValue());
+    return values.reduce((a, b) => a + b);
+  }
 }

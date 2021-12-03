@@ -32,6 +32,9 @@ export interface Project {
   // Имя пути
   pathName: string;
 
+  //Теги
+  tags: string[];
+
 
   // Релевантность
   relevance: number;

@@ -1,5 +1,17 @@
-<mat-card>
-  <div style="min-height: 300px" class="p-2">
+<div class="position-relative">
+
+  <div class="position-fixed" [ngStyle]="{
+    'top': '14px',
+    'width': 'calc(50% - 7rem)',
+    'minWidth': 'calc(470px - 7rem)'
+  }">
+    <div class="d-flex justify-content-between">
+      <h3 class="ml-2 my-0">ФИЛЬТРЫ</h3>
+    </div>
+    <hr class="m-0"/>
+  </div>
+
+  <div style="min-height: 300px" class="p-4">
     <div *ngIf="!formFields.length" class="center">
       <p-progressSpinner></p-progressSpinner>
     </div>
@@ -9,6 +21,9 @@
                         (onFormChanged)="onFormChanged($event, 'general')"></app-dynamic-form>
     </div>
 
-    <button (click)="onClick()">Click</button>
+    <div class="text-center mt-5">
+      <button (click)="onApplyFilters()" class="mr-3">Применить</button>
+      <button (click)="onClickClearFilters()">Очистить</button>
+    </div>
   </div>
-</mat-card>
+</div>

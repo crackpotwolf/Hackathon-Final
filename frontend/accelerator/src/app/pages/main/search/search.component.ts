@@ -27,6 +27,7 @@ export class SearchComponent implements OnInit {
 
 
   timeoutTimer: any;
+  isVisibleFilters: boolean = false;
 
   /**
    * Событие изменения текста фильтра

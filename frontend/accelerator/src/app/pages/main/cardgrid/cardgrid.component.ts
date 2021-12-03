@@ -84,6 +84,12 @@ export class CardgridComponent implements OnInit {
         this.projectIsLoading = false;
         this.foundProjects = e.data;
         break;
+      case ProjectServiceEventType.GetCurrentProjects:
+        this.projectsService.onEvents.emit(new ProjectServiceEventData({
+          type: ProjectServiceEventType.CurrentProjects,
+          data: this.getShowProjects()
+        }));
+        break;
     }
   }
 }

@@ -100,6 +100,11 @@ export class FormFieldBase<T> {
   offLabel: string;
 
   /**
+   * Поле долджно быть в виде выпадающей панели
+   */
+  isExpansionPanel: boolean;
+
+  /**
    * Функция обработки изменения поля, которая может
    * вернуть новое значение другого элемента формы.
    * Например: форма из 2х полей [firstName, lastName]
@@ -133,6 +138,7 @@ export class FormFieldBase<T> {
     onChange?: (currentValue: any) => void,
     convertLineBreaks?: boolean,
     colon?: boolean,
+    isExpansionPanel?: boolean,
   } = {}) {
     this.value = options.value || undefined;
     this.min = options.min || undefined;
@@ -154,6 +160,7 @@ export class FormFieldBase<T> {
     this.offLabel = options.offLabel || '';
     this.onChange = options.onChange;
     this.colon = options.colon;
+    this.isExpansionPanel = options.isExpansionPanel;
 
 
     if (options.convertLineBreaks == undefined || options.convertLineBreaks) {

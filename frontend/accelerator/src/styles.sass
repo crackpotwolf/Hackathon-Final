@@ -4,6 +4,8 @@
   src: url('assets/fonts/moscowsansregular.woff') format('woff')
   font-weight: bold
 
+$green: #009A96
+
 *
   font-family: 'test'
 
@@ -21,7 +23,11 @@ body
 .mat-accent .mat-slider-track-fill,
 .mat-accent .mat-slider-thumb,
 .mat-accent .mat-slider-thumb-label
-  background-color: #005af5
+  background-color: #009A96
+
+.mat-slider-min-value.mat-slider-thumb-label-showing .mat-slider-thumb,
+.mat-slider-min-value.mat-slider-thumb-label-showing .mat-slider-thumb-label
+  background-color: #009A96
 
 .mat-slider-horizontal .mat-slider-track-background,
 .mat-slider-horizontal .mat-slider-track-fill,
@@ -46,3 +52,24 @@ textarea
   //background-position: right calc(0.375em + 0.235rem) center
   //background-size: calc(0.75em + 0.47rem) calc(0.75em + 0.47rem)
   color: #ff3d60
+
+
+hr
+  color: $green
+  height: 3px !important
+  width: 100%
+  opacity: 1
+
+.btn-circle
+  border-radius: 50%
+
+.label-change-filter
+  border: 1px solid $green
+  border-radius: 50%
+  height: 23px
+  width: 23px
+  line-height: 23px
+  margin: 0 5px
+  text-align: center !important
+  background: $green
+  color: white

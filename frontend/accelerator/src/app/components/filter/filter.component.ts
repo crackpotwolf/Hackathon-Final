@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {FormFieldBase} from "../dynamic-forms/entities/_field-base";
 import {FormGroup} from "@angular/forms";
 import {TypeFilter} from "./Data/type-filter";
-import {CheckboxField} from "../dynamic-forms/entities/checkbox";
 import {GroupCheckboxField} from "../dynamic-forms/entities/group-checkbox";
 import {RangeField} from "../dynamic-forms/entities/slider";
 import {HttpClient} from "@angular/common/http";
@@ -37,10 +36,9 @@ export class FilterComponent implements OnInit {
    * @private
    */
   private onEventProjectSevice(e: ProjectServiceEventData) {
-    switch (e.type) {
-      case ProjectServiceEventType.LoadingComplete:
-        this.loadingFilters(e.data);
-        break;
+    if (e.type == ProjectServiceEventType.LoadingComplete
+      || e.type == ProjectServiceEventType.CurrentProjects) {
+      this.loadingFilters(e.data);
     }
   }
 
@@ -61,20 +59,23 @@ export class FilterComponent implements OnInit {
   private loadingFilters(allProjects: Project[]) {
     console.log(allProjects);
     //TODO: Сделать загрузку из БД
+    this.filters = [];
 
+    this.addTimingFilter(allProjects);
     this.addCheckboxGroupFilter(allProjects, 'order.stage', "Стадия готовности");
     this.addCheckboxGroupFilter(allProjects, 'order.sertification', "Cертификация");
+    this.addCheckboxGroupFilter(allProjects, 'transportComplexOrganization', "Целевая организация");
     this.filters.push(
       {
         name: "Сколько человек в организации",
         key: 'order.peopleCount',
         type: TypeFilter.checkbox,
         values: [{key: "3", value: "Менее 20"},
-          {key: "4", value: "от 20 до 100"},
-          {key: "5", value: "от 100 до 500"},
-          {key: "5", value: "более 500"}]
+          {key: "4", value: "От 20 до 100"},
+          {key: "5", value: "От 100 до 500"},
+          {key: "5", value: "Более 500"}]
       });
-    this.addTimingFilter(allProjects);
+    this.addTagsFilter(allProjects);
     this.setFormField();
   }
 
@@ -137,10 +138,16 @@ export class FilterComponent implements OnInit {
    * @private
    */
   private setFormField() {
+    this.formFields = [];
     for (const filter of this.filters) {
       switch (filter.type) {
         case TypeFilter.checkbox:
-          this.formFields.push(new GroupCheckboxField({label: filter.name, key: filter.key, options: filter.values}));
+          this.formFields.push(new GroupCheckboxField({
+            label: filter.name,
+            key: filter.key,
+            options: filter.values,
+            isExpansionPanel: true
+          }));
           break;
         case TypeFilter.range:
           this.formFields.push(new RangeField({
@@ -161,9 +168,16 @@ export class FilterComponent implements OnInit {
   }
 
   /**
-   * Вывод значений фильтров
+   * Очистка фильтров
    */
-  onClick() {
+  onClickClearFilters() {
+    this.projectsService.onEvents.emit(new ProjectServiceEventData({type: ProjectServiceEventType.GetCurrentProjects}));
+  }
+
+  /**
+   * Применение фильтров
+   */
+  onApplyFilters() {
     let rawValue = this.form?.getRawValue();
     console.log('\n\n\n')
     console.log(rawValue)
@@ -174,5 +188,32 @@ export class FilterComponent implements OnInit {
       }
     }
     console.log(rawValue);
+  }
+
+
+  /**
+   * Добавление фильтра с тегами
+   * @param allProjects
+   * @private
+   */
+  private addTagsFilter(allProjects: Project[]) {
+    // let tags = [...new Set(allProjects.map(p => p.tags).reduce((prev, curr) => [...prev, ...curr]))];
+    let tags = [
+      "Доступный и комфортный городской транспорт",
+      "Новые виды мобильности",
+      "Безопасность дорожного движения",
+      "Здоровые улицы и экология",
+      "Цифровые технологии в транспорте"
+    ];
+    if (tags.length) {
+      this.filters.push({
+        name: 'Технологическое направление',
+        key: 'tags',
+        type: TypeFilter.checkbox,
+        values: tags.map(p => {
+          return {key: p, value: p};
+        })
+      });
+    }
   }
 }
