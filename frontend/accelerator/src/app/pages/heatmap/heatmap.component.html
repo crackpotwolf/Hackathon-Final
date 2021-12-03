@@ -1,30 +1,28 @@
-<div class="row col-10 mx-auto">
+<div class="row">
 
   <div class="col-xl-3">
-    <div class="card shadow mb-4 maprows">
-      <div class="card-header card-header py-3 d-flex flex-row align-items-center d-flex justify-content-between">
-        <label>Технологическое направление</label>
-      </div>
 
-      <div class="card-body align-middle">
-        <h5>Выберете технологическое направление:</h5>
-        <p-dropdown [options]="tDirections" [(ngModel)]="selectedTDirection" (onChange)="initMap()"></p-dropdown>
+    <div class="card shadow mb-5">
+      <div class="card-header card-header py-3 d-flex flex-row align-items-center"><label>Выбор графика движения</label></div>
+      <div class="card-body container-fullcalendar">
+        <div class="item form-group">
+          <h5>Выберете технологическое направление:</h5>
+          <p-dropdown [styleClass]="'w-100'" [options]="tDirections" [(ngModel)]="selectedTDirection" (onChange)="initMap(selectedTDirection)"></p-dropdown>
+        </div>
       </div>
-
     </div>
+
   </div>
 
   <div class="col-xl-9">
-
     <div class="card shadow mb-4 maprows">
       <div class="card-header card-header py-3 d-flex flex-row align-items-center"><label>Тепловая карта</label></div>
-
-      <div class="card-body">
+      <div class="">
         <div class="row-fluid">
           <div id="YMapsID" class="maprow"></div>
         </div>
       </div>
-
     </div>
   </div>
+
 </div>

@@ -32,13 +32,13 @@ export class HeatmapComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.initMap(this.selectedTDirection);
+    this.initMap(this.tDirections[0]);
   }
 
   /**
    * Инициализация карты
    */
-  initMap() {
+  initMap(selectedTDirection: string) {
 
     document.getElementById("YMapsID").innerHTML = "";
 
@@ -48,13 +48,16 @@ export class HeatmapComponent implements OnInit {
       let myMap = new ymaps.Map('YMapsID', {
         center: [55.733835, 37.588227],
         zoom: 11,
-        controls: []
+        controls: [],
+        responsive: true
       });
 
       let data = [];
 
       for (let i = 0; i < obj.length; i++) {
-        data.push([obj[i].Cells.geoData.coordinates[0], obj[i].Cells.geoData.coordinates[1]])
+        if (obj[i].TechnologicalDirection == selectedTDirection) {
+          data.push([obj[i].Cells.geoData.coordinates[0], obj[i].Cells.geoData.coordinates[1]])
+        }
       }
 
       let heatmap = new ymaps.Heatmap(data, {
