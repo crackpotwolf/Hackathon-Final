@@ -61,6 +61,8 @@ import {ButtonModule} from 'primeng/button';
 import {RequestForInnovationComponent} from './request-for-innovation/request-for-innovation.component';
 import { ProjectComponent } from './project/project.component';
 import { SearchComponent } from './main/search/search.component';
+import { HeatmapComponent } from './heatmap/heatmap.component';
+import {AutoCompleteModule} from "primeng/autocomplete";
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -83,7 +85,8 @@ const DragConfig = {
       DynamicFormComponent,
       RequestForInnovationComponent,
       ProjectComponent,
-      SearchComponent
+      SearchComponent,
+      HeatmapComponent
     ],
   imports: [
     CommonModule,
@@ -134,6 +137,7 @@ const DragConfig = {
     DividerModule,
     PagesRoutingModule,
     DataViewModule,
+    AutoCompleteModule,
   ],
   exports: [
     RequestForInnovationComponent,
