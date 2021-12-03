@@ -5,6 +5,8 @@ using Hangfire;
 using Hangfire.Dashboard;
 using Hangfire.PostgreSql;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using Microsoft.Extensions.FileProviders;
+using Microsoft.Extensions.Options;
 using System.Reflection;
 
 namespace Accelerator
@@ -74,8 +76,24 @@ namespace Accelerator
         public void Configure(IApplicationBuilder app,
             IApiVersionDescriptionProvider provider,
             IWebHostEnvironment env,
+            IOptions<PathConfig> pathConfig,
             InitDB InitDB)
         {
+            if (env.EnvironmentName != "Development")
+            {
+                // Если папки нету
+                if (!Directory.Exists(pathConfig.Value.UserPhotos))
+                {
+                    DirectoryInfo di = Directory.CreateDirectory(pathConfig.Value.UserPhotos);
+                }
+
+                app.UseStaticFiles(new StaticFileOptions
+                {
+                    FileProvider = new PhysicalFileProvider(pathConfig.Value.UserPhotos),
+                    RequestPath = "/photos"
+                });
+            }
+
             app.UseBaseServices(env, provider);
 
             app.UseHangfireDashboard("/hangfire", new DashboardOptions()

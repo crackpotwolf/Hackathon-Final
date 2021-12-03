@@ -75,6 +75,11 @@ namespace Data.Models.DB.Project
         public List<string> Tags { get; set; }
 
         /// <summary>
+        /// Фотки
+        /// </summary>
+        public List<string> Photos { get; set; }
+
+        /// <summary>
         /// Список тэгов в строковом представлении
         /// </summary>
         [Searchable]
