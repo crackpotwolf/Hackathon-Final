@@ -18,19 +18,11 @@ export class HeatmapComponent implements OnInit {
 
   public map: any;
 
-  text: string;
 
-  results: string[] = ["22"];
-
-  search(event) {
-
-  }
 
   ngOnInit(): void {
 
     this.results = ["22", "ff"];
-
-    console.log(this.results);
 
     ymaps.ready(['Heatmap']).then(function init() {
       var obj = jsonmap;

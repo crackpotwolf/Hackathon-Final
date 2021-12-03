@@ -8,7 +8,7 @@
 
       <div class="card-body align-middle" id="Region">
         <h5>Dropdown and Templating</h5>
-        <p-autoComplete [(ngModel)]="text" [suggestions]="results" (completeMethod)="search($event)" [dropdown]="true"></p-autoComplete>
+        <p-dropdown [options]="cities" [(ngModel)]="selectedCity" optionLabel="name"></p-dropdown>
       </div>
 
     </div>

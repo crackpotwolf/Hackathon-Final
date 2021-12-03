@@ -69,7 +69,7 @@ namespace Accelerator.Controllers.API.v1
                 }
 
                 // Если фоток нету
-                if (project.Photos.Count == 0)
+                if (project.Photos == null || project.Photos.Count == 0)
                 {
                     _logger.LogInformation($"Фоток отсутсвует");
                     return StatusCode(204, "Фоток отсутсвует");
@@ -131,6 +131,8 @@ namespace Accelerator.Controllers.API.v1
                 // Сохранить файл
                 SaveDocument(sourceDocPath, file);
 
+                if (project.Photos == null) project.Photos = new List<string>();
+
                 // Обновить проект
                 project.Photos.Add(sourceDoсName);
 
@@ -175,7 +177,7 @@ namespace Accelerator.Controllers.API.v1
                 }
 
                 // Если фотка уже есть
-                if (project.Photos.Contains(photoName))
+                if (project.Photos != null && project.Photos.Contains(photoName))
                 {
                     // Удалить фото
                     DeleteDocument(Path.Combine(GetPathProjectPhotos(), photoName));
