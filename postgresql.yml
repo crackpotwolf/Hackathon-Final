@@ -1,0 +1,35 @@
+version: "3"
+
+#----------------------------------------
+# Развертывание Postgres вместе с pgAdmin
+#----------------------------------------
+
+services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: PASSWORD
+      POSTGRES_USER: postgres
+      PGDATA: /var/lib/postgresql/data
+    volumes:
+      - /data/postgresql/db-data:/var/lib/postgresql/data
+    ports:
+      - "6987:5432"
+    command: postgres -c 'max_connections=200'
+
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: email@email.ru
+      PGADMIN_DEFAULT_PASSWORD: PASSWORD
+      PGADMIN_LISTEN_PORT: 80
+    volumes:
+      - /data/postgresql/pgadmin-data:/var/lib/pgadmin
+    ports:
+      - "9731:80"
+    links:
+      - "db:db"
+# Запуск
+#  sudo docker-compose -f Postgres.yaml -p postgres up
