@@ -235,15 +235,7 @@ namespace Search.Controllers.API.v1
                 else if (String.IsNullOrEmpty(input.Team) && !String.IsNullOrEmpty(input.Project) && String.IsNullOrEmpty(input.Description))
                     results = projectGuids.Distinct().ToList();
                 return Ok(_projectRepository.GetListQuery().Where(p => results.Contains(p.Guid))
-                    .Include(p => p.Activities)
-                    .Include(p => p.Budget)
-                    .Include(p => p.Effects)
-                    .Include(p => p.Materials)
-                    .Include(p => p.Meetings)
                     .Include(p => p.Order)
-                    .Include(p => p.Stages)
-                    .Include(p => p.Statuses)
-                    .Include(p => p.Teams)
                     .ToList());
             }
             catch (Exception ex)
