@@ -2,7 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {FormFieldBase} from "../../components/dynamic-forms/entities/_field-base";
 import {FormGroup} from "@angular/forms";
 import {TextareaField} from "../../components/dynamic-forms/entities/textarea";
-import {TextboxField} from "../../components/dynamic-forms/entities/textbox";
+import {MessageService} from "primeng/api";
+import {ProjectsService} from "../../../services/projects/projects.service";
+import {ProjectServiceEventData} from "../../../services/projects/data/ProjectServiceEventData";
+import {ProjectServiceEventType} from "../../../services/projects/data/ProjectServiceEventType";
 
 @Component({
   selector: 'app-request-for-innovation',
@@ -90,7 +93,8 @@ export class RequestForInnovationComponent implements OnInit {
   ];
   form?: FormGroup;
 
-  constructor() {
+  constructor(private messageService: MessageService,
+              private projectsService: ProjectsService) {
   }
 
   ngOnInit(): void {
@@ -106,7 +110,11 @@ export class RequestForInnovationComponent implements OnInit {
   }
 
   sendRequestForInnovation() {
-    console.log(this.form?.getRawValue());
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Заявка на инновацию успешно отправлена',
+    });
+    this.projectsService.onEvents.emit(new ProjectServiceEventData({type: ProjectServiceEventType.SendRequestInvest}));
   }
 
   isValidForm(): boolean {
