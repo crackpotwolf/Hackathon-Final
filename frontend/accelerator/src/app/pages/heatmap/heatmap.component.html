@@ -1,0 +1,29 @@
+<div class="row">
+
+  <div class="col-xl-3">
+    <div class="card shadow mb-4 maprows">
+      <div class="card-header card-header py-3 d-flex flex-row align-items-center d-flex justify-content-between">
+        <label>Технологическое направление</label>
+      </div>
+
+      <div class="card-body align-middle" id="Region">
+        <h5>Dropdown and Templating</h5>
+        <p-autoComplete [(ngModel)]="text" [suggestions]="results" (completeMethod)="search($event)" [dropdown]="true"></p-autoComplete>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="col-xl-9">
+
+    <div class="card shadow mb-4 maprows">
+      <div class="card-header card-header py-3 d-flex flex-row align-items-center"><label>Тепловая карта</label></div>
+
+      <div class="card-body">
+        <div class="row-fluid">
+          <div id="YMapsID" class="maprow"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
