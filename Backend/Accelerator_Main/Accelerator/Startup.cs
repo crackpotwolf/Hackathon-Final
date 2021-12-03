@@ -13,9 +13,12 @@ namespace Accelerator
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        private IWebHostEnvironment CurrentEnvironment { get; set; }
+
+        public Startup(IWebHostEnvironment env, IConfiguration configuration)
         {
             Configuration = configuration;
+            CurrentEnvironment = env;
         }
 
         public IConfiguration Configuration { get; }
@@ -23,6 +26,8 @@ namespace Accelerator
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            string env = CurrentEnvironment.EnvironmentName;
+
             #region Базовая инициализация DI
 
             services.AddBaseModuleDI(Configuration.GetConnectionString("DefaultConnection"));
@@ -64,10 +69,13 @@ namespace Accelerator
                 }));
 
             // Add the processing server as IHostedService
-            services.AddHangfireServer(options =>
+            if (env != "Development")
             {
-                options.WorkerCount = 5;
-            });
+                services.AddHangfireServer(options =>
+                {
+                    options.WorkerCount = 5;
+                });
+            }
 
             #endregion
         }

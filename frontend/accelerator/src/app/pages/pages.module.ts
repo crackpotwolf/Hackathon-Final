@@ -63,6 +63,7 @@ import { ProjectComponent } from './project/project.component';
 import { SearchComponent } from './main/search/search.component';
 import { HeatmapComponent } from './heatmap/heatmap.component';
 import {AutoCompleteModule} from "primeng/autocomplete";
+import {CardModule} from "primeng/card";
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -138,6 +139,7 @@ const DragConfig = {
     PagesRoutingModule,
     DataViewModule,
     AutoCompleteModule,
+    CardModule,
   ],
   exports: [
     RequestForInnovationComponent,
