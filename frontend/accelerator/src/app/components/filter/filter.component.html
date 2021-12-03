@@ -19,11 +19,11 @@
     <div *ngIf="formFields.length">
       <app-dynamic-form [fields]="formFields"
                         (onFormChanged)="onFormChanged($event, 'general')"></app-dynamic-form>
-    </div>
 
-    <div class="text-center mt-5">
-      <button (click)="onApplyFilters()" class="mr-3">Применить</button>
-      <button (click)="onClickClearFilters()">Очистить</button>
+      <div class="text-center mt-5">
+        <button (click)="onApplyFilters()" class="mr-3">Применить</button>
+        <button (click)="onClickClearFilters()">Очистить</button>
+      </div>
     </div>
   </div>
 </div>

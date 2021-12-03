@@ -24,5 +24,14 @@ export enum ProjectServiceEventType {
   /**
    * Выгрузка текущих проектов
    */
-  CurrentProjects
+  CurrentProjects,
+
+  /**
+   * Применение фильтро
+   */
+  ApplyFilters,
+  /**
+   * Сброс фильтро
+   */
+  ClearFilters,
 }

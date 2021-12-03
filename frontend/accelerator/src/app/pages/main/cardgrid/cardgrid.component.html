@@ -3,7 +3,10 @@
 
   <ng-template pTemplate="header">
     <div class="d-flex justify-content-between align-items-end">
-      <label style="" class="text-xs">Всего {{projects.length}} компаний </label>
+      <label *ngIf="projects.length == getShowProjects().length" style="" class="text-xs">Всего {{projects.length}}
+        компаний </label>
+      <label *ngIf="projects.length != getShowProjects().length" style=""
+             class="text-xs">Найдено {{getShowProjects().length}} компаний </label>
       <p-dataViewLayoutOptions class="p-button-sm"></p-dataViewLayoutOptions>
     </div>
   </ng-template>

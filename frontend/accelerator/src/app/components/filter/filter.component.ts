@@ -60,23 +60,28 @@ export class FilterComponent implements OnInit {
     console.log(allProjects);
     //TODO: Сделать загрузку из БД
     this.filters = [];
+    this.formFields = [];
+    setTimeout(() => {
 
-    this.addTimingFilter(allProjects);
-    this.addCheckboxGroupFilter(allProjects, 'order.stage', "Стадия готовности");
-    this.addCheckboxGroupFilter(allProjects, 'order.sertification', "Cертификация");
-    this.addCheckboxGroupFilter(allProjects, 'transportComplexOrganization', "Целевая организация");
-    this.filters.push(
-      {
-        name: "Сколько человек в организации",
-        key: 'order.peopleCount',
-        type: TypeFilter.checkbox,
-        values: [{key: "3", value: "Менее 20"},
-          {key: "4", value: "От 20 до 100"},
-          {key: "5", value: "От 100 до 500"},
-          {key: "5", value: "Более 500"}]
-      });
-    this.addTagsFilter(allProjects);
-    this.setFormField();
+      this.form = undefined;
+
+      this.addTimingFilter(allProjects);
+      this.addCheckboxGroupFilter(allProjects, 'order.stage', "Стадия готовности");
+      this.addCheckboxGroupFilter(allProjects, 'order.sertification', "Cертификация");
+      this.addCheckboxGroupFilter(allProjects, 'transportComplexOrganization', "Целевая организация");
+      this.filters.push(
+        {
+          name: "Сколько человек в организации",
+          key: 'order.peopleCount',
+          type: TypeFilter.checkbox,
+          values: [{key: "3", value: "Менее 20"},
+            {key: "4", value: "От 20 до 100"},
+            {key: "5", value: "От 100 до 500"},
+            {key: "5", value: "Более 500"}]
+        });
+      this.addTagsFilter(allProjects);
+      this.setFormField();
+    }, 500)
   }
 
 
@@ -171,6 +176,7 @@ export class FilterComponent implements OnInit {
    * Очистка фильтров
    */
   onClickClearFilters() {
+    this.projectsService.onEvents.emit(new ProjectServiceEventData({type: ProjectServiceEventType.ClearFilters}));
     this.projectsService.onEvents.emit(new ProjectServiceEventData({type: ProjectServiceEventType.GetCurrentProjects}));
   }
 
@@ -179,15 +185,18 @@ export class FilterComponent implements OnInit {
    */
   onApplyFilters() {
     let rawValue = this.form?.getRawValue();
-    console.log('\n\n\n')
-    console.log(rawValue)
 
     for (const key of Object.keys(rawValue)) {
       if (rawValue[key]?.constructor.name == 'FormGroup') {
         rawValue[key] = rawValue[key].getRawValue();
       }
     }
-    console.log(rawValue);
+
+    this.projectsService.onEvents.emit(new ProjectServiceEventData({
+      type: ProjectServiceEventType.ApplyFilters,
+      data: rawValue
+    }));
+    // console.log(rawValue);
   }
 
 
