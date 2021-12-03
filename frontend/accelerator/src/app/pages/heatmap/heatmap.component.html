@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row col-10 mx-auto">
 
   <div class="col-xl-3">
     <div class="card shadow mb-4 maprows">
@@ -6,9 +6,9 @@
         <label>Технологическое направление</label>
       </div>
 
-      <div class="card-body align-middle" id="Region">
-        <h5>Dropdown and Templating</h5>
-        <p-dropdown [options]="cities" [(ngModel)]="selectedCity" optionLabel="name"></p-dropdown>
+      <div class="card-body align-middle">
+        <h5>Выберете технологическое направление:</h5>
+        <p-dropdown [options]="tDirections" [(ngModel)]="selectedTDirection" (onChange)="initMap()"></p-dropdown>
       </div>
 
     </div>
@@ -24,6 +24,7 @@
           <div id="YMapsID" class="maprow"></div>
         </div>
       </div>
+
     </div>
   </div>
 </div>

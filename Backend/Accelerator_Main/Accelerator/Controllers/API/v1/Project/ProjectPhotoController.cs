@@ -47,7 +47,7 @@ namespace Accelerator.Controllers.API.v1
         /// <summary>
         /// Получить URL фотки проекта
         /// </summary>
-        /// <param name="projectGuid">Guid пользователя</param>
+        /// <param name="projectGuid">Guid проекта</param>
         /// <returns></returns>
         [HttpGet("{projectGuid:guid}/photos/url")]
         [Produces("application/json")]

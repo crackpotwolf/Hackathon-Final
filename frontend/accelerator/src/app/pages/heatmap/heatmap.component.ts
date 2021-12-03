@@ -10,36 +10,54 @@ declare var ymaps:any;
   styleUrls: ['./heatmap.component.sass']
 })
 
+
 export class HeatmapComponent implements OnInit {
 
-  constructor(private http: HttpClient) { }
-
-  public data:any = [];
+  public data: any = [];
 
   public map: any;
 
+  tDirections: string[];
 
+  selectedTDirection: string;
+
+  constructor(private http: HttpClient) {
+    this.tDirections = [
+      "Доступный и комфортный городской транспорт",
+      "Новые виды мобильности",
+      "Безопасность дорожного движения",
+      "Здоровые улицы и экология",
+      "Цифровые технологии в транспорте"
+    ];
+  }
 
   ngOnInit(): void {
+    this.initMap(this.selectedTDirection);
+  }
 
-    this.results = ["22", "ff"];
+  /**
+   * Инициализация карты
+   */
+  initMap() {
+
+    document.getElementById("YMapsID").innerHTML = "";
 
     ymaps.ready(['Heatmap']).then(function init() {
-      var obj = jsonmap;
+      let obj = jsonmap;
 
-      var myMap = new ymaps.Map('YMapsID', {
+      let myMap = new ymaps.Map('YMapsID', {
         center: [55.733835, 37.588227],
         zoom: 11,
         controls: []
       });
 
-      var data = [];
+      let data = [];
 
-      for (var i = 0; i < obj.length; i++) {
+      for (let i = 0; i < obj.length; i++) {
         data.push([obj[i].Cells.geoData.coordinates[0], obj[i].Cells.geoData.coordinates[1]])
       }
 
-      var heatmap = new ymaps.Heatmap(data, {
+      let heatmap = new ymaps.Heatmap(data, {
 
         // Радиус влияния.
         radius: 15,
