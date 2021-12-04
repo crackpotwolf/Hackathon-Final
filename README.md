@@ -18,7 +18,7 @@
 
 # Основной стек технологий:
 
-- HTML, CSS, JavaScript
+- HTML, CSS, JavaScript, Angular, Typescript
 - Elasticsearch\Kibana
 - C#, Asp.Net Core
 - Python, Flask
