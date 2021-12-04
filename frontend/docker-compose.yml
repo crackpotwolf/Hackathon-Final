@@ -1,0 +1,18 @@
+version: '3.4'
+
+services:
+  employee_accounting_front:
+    image: "repo.treescale.com/welbi/employee-accounting-frontend:production"
+    container_name: employee_accounting_front
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 7000:80
+    networks:
+      - employee-network
+
+networks:
+  employee-network:
+    external: true
