@@ -67,7 +67,7 @@ export class ProjectComponent implements OnInit {
   loadPhotos(guidProject: string | null) {
     this.http.get<string[]>(`/api/accelerator/v1/project-photos/${guidProject}/photos/url`)
       .subscribe(resp => {
-        this.linksPhoto = [...resp, ...resp, ...resp, ...resp];
+        this.linksPhoto = resp;
       });
   }
 
