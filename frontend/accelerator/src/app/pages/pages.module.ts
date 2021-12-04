@@ -66,6 +66,7 @@ import {AutoCompleteModule} from "primeng/autocomplete";
 import {CardModule} from "primeng/card";
 import {TimelineModule} from "primeng/timeline";
 import {CarouselModule} from "primeng/carousel";
+import { FavoritesComponent } from './main/favorites/favorites.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -89,7 +90,8 @@ const DragConfig = {
       RequestForInnovationComponent,
       ProjectComponent,
       SearchComponent,
-      HeatmapComponent
+      HeatmapComponent,
+      FavoritesComponent
     ],
   imports: [
     CommonModule,

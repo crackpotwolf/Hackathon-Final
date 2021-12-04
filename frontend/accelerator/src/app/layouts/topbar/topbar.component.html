@@ -10,16 +10,16 @@
     <div class="dropdown d-flex h-100">
       <!-- Кнопка "Запрос на инновацию" -->
 
+      <!-- Кнопка "Поиск" -->
+      <button class="btn btn-hover-light green" mat-button (click)="openPage('/')">
+        <i class="fas fa-search mr-2"></i> <span>Поиск</span>
+      </button>
       <div class="d-flex flex-column justify-content-center">
 
         <button class="btn btn-hover-light green" mat-button (click)="displaySidebar=true">
           <i class="far fa-comment mr-2"></i> <span>Заявка на инновацию</span>
         </button>
       </div>
-      <!-- Кнопка "Поиск" -->
-      <button class="btn btn-hover-light green" mat-button (click)="openPage('/')">
-        <i class="fas fa-search mr-2"></i> <span>Поиск</span>
-      </button>
       <button class="btn btn-hover-light green" mat-button (click)="openPage('/heat-map')">
         <i class="fas fa-map-marker-alt mr-2"></i><span>Карта пилотных проектов</span>
       </button>
@@ -27,8 +27,8 @@
         <i class="fas fa-user-alt mr-2"></i><span>Личный кабинет</span>
       </button>
       <!-- Кнопка "Избранное" -->
-      <button class="btn btn-hover-light green" mat-button (click)="onClickFavorites($event)"><i
-        class="far fa-star"></i>
+      <button class="btn btn-hover-light green" mat-button (click)="openPage('/favorites')"><i
+        class="far fa-star mr-2"></i><span>Избранное</span>
       </button>
 
       <!--      &lt;!&ndash; Аккаунт &ndash;&gt;-->

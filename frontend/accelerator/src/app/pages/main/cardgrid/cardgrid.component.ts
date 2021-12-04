@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {PrimeNGConfig, SelectItem} from 'primeng/api';
 import {ProjectsService} from "../../../../services/projects/projects.service";
@@ -13,6 +13,8 @@ import * as moment from "moment";
   styleUrls: ['./cardgrid.component.scss']
 })
 export class CardgridComponent implements OnInit {
+
+  @Input() onlyFavorites: boolean = false;
 
   projects: Project[] = [];
 
@@ -75,7 +77,11 @@ export class CardgridComponent implements OnInit {
   private onEventProjectSevice(e: ProjectServiceEventData) {
     switch (e.type) {
       case ProjectServiceEventType.LoadingComplete:
+        let favorites: any[] = JSON.parse(localStorage.getItem('favorites')) ?? [];
         this.projects = e.data;
+        if (this.onlyFavorites) {
+          this.projects = this.projects.filter(p => favorites.indexOf(p.guid) != -1);
+        }
         break;
       case ProjectServiceEventType.RunninSearchByGlobal:
         this.projectIsLoading = true;
