@@ -3,6 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {MainComponent} from "./main/main.component";
 import {ProjectComponent} from "./project/project.component";
 import {HeatmapComponent} from "./heatmap/heatmap.component";
+import {FavoritesComponent} from "./main/favorites/favorites.component";
 
 const routes: Routes = [
   {
@@ -19,6 +20,10 @@ const routes: Routes = [
       {
         path: 'heat-map',
         component: HeatmapComponent
+      },
+      {
+        path: 'favorites',
+        component: FavoritesComponent
       },
     ]
   },
