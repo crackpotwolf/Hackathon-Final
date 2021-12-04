@@ -1,9 +1,9 @@
 version: '3.4'
 
 services:
-  employee_accounting_front:
-    image: "repo.treescale.com/welbi/employee-accounting-frontend:production"
-    container_name: employee_accounting_front
+  frontend:
+    image: frontend
+    container_name: frontend
     restart: always
     build:
       context: .

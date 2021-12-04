@@ -23,4 +23,4 @@ FROM nginx:latest
 
 # Copy the build output to replace the default nginx contents.
 COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
-COPY --from=build /app/dist/employee-accounting /usr/share/nginx/html
+COPY --from=build /app/dist/accelerator /usr/share/nginx/html
