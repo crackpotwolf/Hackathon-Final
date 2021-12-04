@@ -9,10 +9,4 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - 7000:80
-    networks:
-      - employee-network
-
-networks:
-  employee-network:
-    external: true
+      - 80:80
