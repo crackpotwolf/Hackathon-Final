@@ -56,7 +56,12 @@ export class HeatmapComponent implements OnInit {
 
       for (let i = 0; i < obj.length; i++) {
         if (obj[i].TechnologicalDirection == selectedTDirection) {
-          data.push([obj[i].Cells.geoData.coordinates[0], obj[i].Cells.geoData.coordinates[1]])
+          for (let j = 0; j < obj[i].coordinates.length; j++) {
+
+            console.log(obj[i].coordinates[j]);
+
+            data.push([obj[i].coordinates[j][0], obj[i].coordinates[j][1]])
+          }
         }
       }
 
