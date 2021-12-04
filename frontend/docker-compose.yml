@@ -10,3 +10,5 @@ services:
       dockerfile: Dockerfile
     ports:
       - 80:80
+    environment:
+      - NODE_OPTIONS=--openssl-legacy-provider
