@@ -69,13 +69,6 @@ export class TopbarComponent implements OnInit {
     WrapperComponent.notImplemented(this.messageService);
   }
 
-  /**
-   * Заявка на инновацию
-   * @param event Событие клика
-   */
-  onClickRequestForInnovation(event: MouseEvent) {
-
-  }
 
   private onEvents(p: ProjectServiceEventData) {
     switch (p.type) {
@@ -83,5 +76,13 @@ export class TopbarComponent implements OnInit {
         this.displaySidebar = false;
         break;
     }
+  }
+
+  openPage(link: string) {
+    window.location.href = link;
+  }
+
+  onClickPerson() {
+    WrapperComponent.notImplemented(this.messageService);
   }
 }
